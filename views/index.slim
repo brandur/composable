@@ -1,0 +1,22 @@
+doctype 5
+
+html
+  head
+    title= @title ? @title : "Composable Apps With a First-class API"
+
+    link href="/assets/application.css" media="screen" rel="stylesheet" type="text/css"
+
+  body.impress-not-supported
+    #impress data-transition-duration="500"
+      .step data-x="-1000" data-y="-1500"
+        p Aren't you just <b>bored</b> with all those slides-based presentations?
+      .step data-x="0" data-y="-1500"
+        p Don't you think that presentations given <strong>in modern browsers</strong> shouldn't <strong>copy the limits</strong> of 'classic' slide decks?
+      .step data-x="1000" data-y="-1500"
+        p Would you like to <strong>impress your audience</strong> with <strong>stunning visualization</strong> of your talk?
+      .step data-x="1500" data-y="-1000" data-scale="5"
+        p This one is big.
+
+    script src="/assets/application.js" type="text/javascript"
+    javascript:
+      impress().init()
