@@ -28,17 +28,17 @@ html
             pre
               | # you can your API key from ~/.netrc
                 curl --user ":$API_KEY" -i https://api.heroku.com/apps
-      .step data-x="#{x}" data-y="#{y += 650}"
+      .step data-x="#{x}" data-y="#{y += 850}"
         .floating
           p We were also <strong>in charge of this</strong>.
         #api-screenshot
-      .step.slide data-x="#{x}" data-y="#{y += 650}"
+      .step.slide data-x="#{x}" data-y="#{y += 850}"
         h3 Core
         ul
           li A Rails app
           li Then, a <strong>BIG RAILS APP</strong>
           li Severe impact on development velocity and effort
-      .step.slide data-x="#{x}" data-y="#{y += 500}"
+      .step.slide data-x="#{x}" data-y="#{y += 850}"
         h3 We broke things out.
         ul
           li Process management
@@ -46,11 +46,11 @@ html
           li Addons
           li Kernel layer infrastructure management
           li Domain management
-      .step.floating data-x="#{x}" data-y="#{y += 500}" data-scale="2"
+      .step.floating data-x="#{x}" data-y="#{y += 850}" data-scale="2"
         #butc
           h3 BUTC
           p <strong>B</strong>reak <strong>u</strong>p <strong>t</strong>he <strong>c</strong>ore
-      .step.slide data-x="#{x}" data-y="#{y += 550}"
+      .step.slide data-x="#{x}" data-y="#{y += 850}"
         h3 Still too big
         ul
           li The goal is something small and agile
@@ -63,7 +63,7 @@ html
                     format.html
                   end
           li But we're an API, why should the web component get special treatment?
-      .step data-x="#{x}" data-y="#{y += 750}"
+      .step data-x="#{x}" data-y="#{y += 850}"
         .floating
           h3 Introducing Dashboard
         #dashboard-screenshot
@@ -85,7 +85,7 @@ html
                       :path     => "/apps"
                     )
                   end
-      .step.slide data-x="#{x}" data-y="#{y += 550}"
+      .step.slide data-x="#{x}" data-y="#{y += 850}"
         p API calls happen on the backend.
         pre
           code.language-ruby
@@ -94,7 +94,7 @@ html
                   @apps = @api.get_apps
                 end
               end
-      .step.slide data-x="#{x}" data-y="#{y += 450}"
+      .step.slide data-x="#{x}" data-y="#{y += 850}"
         h3 Where's the fat client?
         ul
           li We enjoy the Ruby experience
@@ -110,7 +110,7 @@ html
                     var Apps = new Backbone.Collection;
                     Apps.reset(<%= @apps.to_json %>);
                   &lt;/script&gt;
-      .step.slide data-x="#{x}" data-y="#{y += 600}"
+      .step.slide data-x="#{x}" data-y="#{y += 850}"
         h3 Metrics
         ul
           li
@@ -124,14 +124,14 @@ html
               li Down to 55k LOCs (55k Ruby)
               li - 11k (~15%)
               li Not the final win, but we'll take it
-      .step.slide data-x="#{x}" data-y="#{y += 500}"
+      .step.slide data-x="#{x}" data-y="#{y += 850}"
         h3 Our API is now an API
         p @todo: diagram of divergence
-      .step data-x="#{x}" data-y="#{y += 500}"
+      .step data-x="#{x}" data-y="#{y += 850}"
         .floating
           h3 Heroku Manager
         #manager-screenshot
-      .step.slide data-x="#{x}" data-y="#{y += 650}"
+      .step.slide data-x="#{x}" data-y="#{y += 850}"
         h3 A good API is a reusable API
         ul
           li
