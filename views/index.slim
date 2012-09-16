@@ -8,13 +8,262 @@ html
 
   body.impress-not-supported
     #impress data-transition-duration="500"
-      .step data-x="-1000" data-y="-1500"
+      - x, y = 0, 0
+      .step data-x="#{x}" data-y="#{y}" data-scale="2"
+        p @brandur
+      .step data-x="#{x}" data-y="#{y += 2000}" data-scale="2"
+        #a-tale-of-composition
+          h3 A Tale of<br>Composition
+      .step.slide data-x="#{x}" data-y="#{y += 600}"
+        h3 Heroku's API Team
+        ul
+          li
+            | If you've used the CLI, you've used the API
+            pre
+              | heroku list
+            pre
+              | GET https://api.heroku.com/apps
+          li
+            | Try it!
+            pre
+              | # you can your API key from ~/.netrc
+                curl --user ":$API_KEY" -i https://api.heroku.com/apps
+      .step data-x="#{x}" data-y="#{y += 650}"
+        .floating
+          p We were also <strong>in charge of this</strong>.
+        #api-screenshot
+      .step.slide data-x="#{x}" data-y="#{y += 650}"
+        h3 Core
+        ul
+          li A Rails app
+          li Then, a <strong>BIG RAILS APP</strong>
+          li Severe impact on development velocity and effort
+      .step.slide data-x="#{x}" data-y="#{y += 500}"
+        h3 We broke things out.
+        ul
+          li Process management
+          li Billing
+          li Addons
+          li Kernel layer infrastructure management
+          li Domain management
+      .step.floating data-x="#{x}" data-y="#{y += 500}" data-scale="2"
+        #butc
+          h3 BUTC
+          p <strong>B</strong>reak <strong>u</strong>p <strong>t</strong>he <strong>c</strong>ore
+      .step.slide data-x="#{x}" data-y="#{y += 550}"
+        h3 Still too big
+        ul
+          li The goal is something small and agile
+          li
+            | Rails taught us to design an API like this:
+            pre
+              code.language-ruby
+                | responds_to do |format|
+                    format.json { render :json => @apps }
+                    format.html
+                  end
+          li But we're an API, why should the web component get special treatment?
+      .step data-x="#{x}" data-y="#{y += 750}"
+        .floating
+          h3 Introducing Dashboard
+        #dashboard-screenshot
+      .step.slide data-x="#{x}" data-y="#{y += 850}"
+        h3 Dashboard Implementation
+        ul
+          li Rails
+          li
+            | Heroku.rb
+            ul
+              li The same backend that handles API calls for the CLI
+            pre
+              code.language-ruby
+                | # GET /apps
+                  def get_apps
+                    request(
+                      :expects  => 200,
+                      :method   => :get,
+                      :path     => "/apps"
+                    )
+                  end
+      .step.slide data-x="#{x}" data-y="#{y += 550}"
+        p API calls happen on the backend.
+        pre
+          code.language-ruby
+            | class AppsController < ApplicationController
+                def index
+                  @apps = @api.get_apps
+                end
+              end
+      .step.slide data-x="#{x}" data-y="#{y += 450}"
+        h3 Where's the fat client?
+        ul
+          li We enjoy the Ruby experience
+          li
+            | Puts all the elements in place for a fat client
+            ul
+              li Graceful degredation
+          li
+            | Backbone still recommends bootstrapped models
+            pre
+              code.language-javascript
+                | &lt;script&gt;
+                    var Apps = new Backbone.Collection;
+                    Apps.reset(<%= @apps.to_json %>);
+                  &lt;/script&gt;
+      .step.slide data-x="#{x}" data-y="#{y += 600}"
+        h3 Metrics
+        ul
+          li
+            | Dashboard
+            ul
+              li + 4500 LOCs (3200 Ruby + 1300 templates)
+          li
+            | Core
+            ul
+              li 66k LOCs (61k Ruby + 5k templates)
+              li Down to 55k LOCs (55k Ruby)
+              li - 11k (~15%)
+              li Not the final win, but we'll take it
+      .step.slide data-x="#{x}" data-y="#{y += 500}"
+        h3 Our API is now an API
+        p @todo: diagram of divergence
+      .step data-x="#{x}" data-y="#{y += 500}"
+        .floating
+          h3 Heroku Manager
+        #manager-screenshot
+      .step.slide data-x="#{x}" data-y="#{y += 650}"
+        h3 A good API is a reusable API
+        ul
+          li
+            | Dashboard is further composed into two tiers
+            ul
+              li API
+              li Web
+      .step data-x="#{x += 1000}" data-y="#{y -= 800}" data-scale="4" data-rotate="-90"
+        #app-composition
+          h2 App<br>Composition
+      .step.slide data-x="#{x}" data-y="#{y -= 1600}" data-rotate="-90"
+        h3 Composability
+        / @todo: real diagram
+        pre
+          | API     <-      CLI + developers
+             |
+             v
+            Web     <-      Other users
+      .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
+        h3 Service oriented architecture
+        ul
+          li Loosely coupled components
+          li Encourages strong contracts (they're required)
+          li Independent scaling of each service
+          li API is a critical factor the increasingly important mobile component
+      .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
+        h3 Rails as frontend
+        ul
+          li
+            | Great at interface
+            ul
+              li Template options
+              li Asset pipeline
+          li Maintenance of state through sessions
+          li Security considerations: XSS/CSRF/etc.
+      .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
+        h3 Rails as frontend
+        ul
+          li
+            | Great at interface
+            ul
+              li Template options
+              li Asset pipeline
+          li Maintenance of state through sessions
+          li Security considerations: XSS/CSRF/etc.
+      .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
+        h3 Rails as API
+        ul
+          li Helpers/views become less useful
+          li ActiveRecord pretty good, but it's now decoupled
+          li <code>ActiveRecord::Serialization#to_json</code> is a bad idea when strong contracts are important
+          li
+            | APIs are about verbs and nouns
+            ul
+              li A routing DSL is an unneeded layer of abstraction
+      .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
+        h3 Sinatra as API
+        pre
+          code.language-ruby
+            | get "/facts/:id" do |id|
+                fact = Fact.first(id: id.to_i) || raise(NotFound)
+                [200, encode_json(fact)]
+              end
+              
+              post "/facts" do
+                fact = Fact.new(fact_params)
+                fact.save
+                [201, encode_json(fact)]
+              end
+        ul
+          li The API's verbs and nouns are explicit
+          li Beyond a trivial app, forces consideration of project structure
+          li Use the exact Rack middleware stack you need
+      .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
+        h3 Grape as API
+        pre
+          code.language-ruby
+            | class Facts::API < Grape::API
+                version 'v0', using: :header
+                
+                resources :facts do
+                  get ":id" do
+                    fact = Fact.first(id: params[:id].to_i) || raise(NotFound)
+                    encode_json(fact)
+                  end
+                
+                  post do
+                    fact = Fact.create(fact_params)
+                    encode_json(fact)
+                  end
+                end
+              end
+        ul
+          li For those willing to accommodate a layer of abstraction
+          li Patterns for versioning, parameter validation and coercion, and endpoint descriptions
+      .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
+        h3 First-class APIs
+        ul
+          li We're not post-Rails, we just moved it up a layer
+      .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
+        h3 Organization
+        ul
+          li
+            | Smaller and more specialized teams
+            ul
+              li <strong>Before:</strong> three backend people, a designer, and a handful of frontend engineers
+              li <strong>After:</strong> API is three backend people; Dashboard is a designer and a frontend engineer
+      .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
+        h3 Happiness
+        ul
+          li Designers and frontend people get to work on a thin web app
+          li Backend people don't have to worry about CSS floats
+          li Internal self-service
+      .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
+        h3 Flexibility
+        ul
+          li Use an agnostic protocol (stay HTTP)
+          li Then use the right tool for the right job
+          / @todo: real diagram
+          pre
+            | --> Ruby (psmgr)       --> Ruby (API)   --> Ruby (Dashboard)
+              --> Erlang (logplex)                    --> Scala (Manager API) --> Ruby (Manager web)
+      / overview
+      .step data-x="2000" data-y="2000" data-scale="8" data-rotate="-90"
+
+      /.step data-x="-1000" data-y="-1500"
         p Aren't you just <b>bored</b> with all those slides-based presentations?
-      .step data-x="0" data-y="-1500"
+      /.step data-x="0" data-y="-1500"
         p Don't you think that presentations given <strong>in modern browsers</strong> shouldn't <strong>copy the limits</strong> of 'classic' slide decks?
-      .step data-x="1000" data-y="-1500"
+      /.step data-x="1000" data-y="-1500"
         p Would you like to <strong>impress your audience</strong> with <strong>stunning visualization</strong> of your talk?
-      .step data-x="1500" data-y="-1000" data-scale="5"
+      /.step data-x="1500" data-y="-1000" data-scale="5"
         p This one is big.
 
     script src="/assets/application.js" type="text/javascript"
