@@ -13,9 +13,19 @@ html
       .step data-x="#{x}" data-y="#{y}" data-scale="2"
         p @brandur
 
-      .step data-x="#{x}" data-y="#{y += 2000}" data-scale="2"
-        #a-tale-of-composition
-          h2 A Tale of<br>Composition
+      .step#agenda data-x="#{x}" data-y="#{y += 2000}" data-scale="2"
+        .floating
+          h3 Agenda
+          ol
+            li
+              a href="#a-tale-of-composition" A tale of composition
+            li
+              a href="#app-composition" App composition
+            li
+              a href="#lessons-learnt" Lessons learnt
+
+      .step#a-tale-of-composition data-x="#{x}" data-y="#{y += 2000}" data-scale="2"
+        h2 A Tale of<br>Composition
 
       .step.slide data-x="#{x}" data-y="#{y += 600}"
         h3 Heroku's API Team
@@ -153,9 +163,8 @@ html
               li Web
           li Core's API separately consumed by Dashboard, Manager, and the CLI
 
-      .step data-x="#{x += 1000}" data-y="#{y -= 800}" data-scale="4" data-rotate="-90"
-        #app-composition
-          h2 App<br>Composition
+      .step#app-composition data-x="#{x += 1000}" data-y="#{y -= 800}" data-scale="4" data-rotate="-90"
+        h2 App<br>Composition
 
       .step.slide data-x="#{x}" data-y="#{y -= 1600}" data-rotate="-90"
         h3 Composability
@@ -266,9 +275,8 @@ html
             | --> Ruby (psmgr)       --> Ruby (API)   --> Ruby (Dashboard)
               --> Erlang (logplex)                    --> Scala (Manager API) --> Ruby (Manager web)
 
-      .step data-x="#{x += 1000}" data-y="#{y}" data-scale="2" data-rotate-y="45"
-        #lessons-learnt
-          h2 Lessons Learnt
+      .step#lessons-learnt data-x="#{x += 1000}" data-y="#{y}" data-scale="2" data-rotate-y="45"
+        h2 Lessons Learnt
 
       .step.slide data-x="#{x}" data-y="#{y += 850}" data-rotate-y="45"
         h3 Stubs

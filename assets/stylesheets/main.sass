@@ -1,3 +1,6 @@
+a
+  color: #000
+
 h3, p, pre, ul
   margin: 30px 0
 
@@ -29,16 +32,22 @@ pre
 strong
   font-weight: bold
 
-ul
-  list-style-type: disc
+ol, ul
   padding: 0 0 0 40px
 
   li
     padding: 0 0 0 8px
+    text-align: left
 
   // don't give nested lists as much padding
-  ul
+  ol, ul
     margin: 0
+
+ol
+  list-style-type: decimal
+
+ul
+  list-style-type: disc
 
 ul.notes
   list-style-type: none
@@ -101,6 +110,11 @@ ul.notes
 //
 // ----
 //
+
+#agenda
+
+  h3
+    text-align: left
 
 #a-tale-of-composition
 
