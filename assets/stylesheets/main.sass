@@ -1,5 +1,5 @@
 h3, p, pre, ul
-  margin: 10px 0
+  margin: 30px 0
 
 body
   font-family: 'PT Serif', georgia, serif
@@ -36,6 +36,10 @@ ul
   li
     padding: 0 0 0 8px
 
+  // don't give nested lists as much padding
+  ul
+    margin: 0
+
 //
 // ----
 //
@@ -71,6 +75,7 @@ ul
 
   h3
     font-size: 40px
+    font-weight: bold
 
   p
     margin: 20px 0

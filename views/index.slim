@@ -225,12 +225,11 @@ html
                 end
               end
         ul
-          li For those willing to accommodate a layer of abstraction
           li Patterns for versioning, parameter validation and coercion, and endpoint descriptions
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
         h3 First-class APIs
         ul
-          li We're not post-Rails, we just moved it up a layer
+          li We're not post-Rails, but we did move it up a layer
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
         h3 Organization
         ul
@@ -263,7 +262,8 @@ html
           li More pieces in the system make development and testing harder
           li You've just composed your apps to streamline your work; setup should also be streamlined
       .step.floating data-x="#{x}" data-y="#{y += 850}"
-        p We started with this.
+        h3 We started with this.
+        p But we don't recommend it.
         pre
           code.language-ruby
             | class AppsController < ApplicationController
@@ -303,8 +303,8 @@ html
       .step.slide data-x="#{x}" data-y="#{y += 850}"
         h3 ... but if you can't
         ul
-          li The pain to deploy a new app must be low
-          li The pain to deploy a new app formation should be low
+          li Pain to deploy a new app must be low
+          li Pain to deploy a new app formation should be low
           li 
             | Easy reconfiguration
             ul
