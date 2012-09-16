@@ -64,12 +64,11 @@ html
           li The goal is something small and agile
           li
             | Rails taught us to design an API like this:
-            pre
-              code.language-ruby
-                | responds_to do |format|
-                    format.json { render :json => @apps }
-                    format.html
-                  end
+            pre.language-ruby
+              | responds_to do |format|
+                  format.json { render :json => @apps }
+                  format.html
+                end
           li But we're an API, why should the web component get special treatment?
 
       .step data-x="#{x}" data-y="#{y += 850}"
@@ -85,26 +84,24 @@ html
             | Heroku.rb
             ul
               li The same backend that handles API calls for the CLI
-            pre
-              code.language-ruby
-                | # GET /apps
-                  def get_apps
-                    request(
-                      :expects  => 200,
-                      :method   => :get,
-                      :path     => "/apps"
-                    )
-                  end
+            pre.language-ruby
+              | # GET /apps
+                def get_apps
+                  request(
+                    :expects  => 200,
+                    :method   => :get,
+                    :path     => "/apps"
+                  )
+                end
 
       .step.slide data-x="#{x}" data-y="#{y += 850}"
         p API calls happen on the backend.
-        pre
-          code.language-ruby
-            | class AppsController < ApplicationController
-                def index
-                  @apps = @api.get_apps
-                end
+        pre.language-ruby
+          | class AppsController < ApplicationController
+              def index
+                @apps = @api.get_apps
               end
+            end
 
       .step.slide data-x="#{x}" data-y="#{y += 850}"
         h3 Where's the fat client?
@@ -116,12 +113,11 @@ html
               li Graceful degredation
           li
             | Backbone still recommends bootstrapped models
-            pre
-              code.language-javascript
-                | &lt;script&gt;
-                    var Apps = new Backbone.Collection;
-                    Apps.reset(<%= @apps.to_json %>);
-                  &lt;/script&gt;
+            pre.language-javascript
+              | &lt;script&gt;
+                  var Apps = new Backbone.Collection;
+                  Apps.reset(<%= @apps.to_json %>);
+                &lt;/script&gt;
 
       .step.slide data-x="#{x}" data-y="#{y += 850}"
         h3 Metrics
@@ -155,6 +151,7 @@ html
             ul
               li API
               li Web
+          li Core's API separately consumed by Dashboard, Manager, and the CLI
 
       .step data-x="#{x += 1000}" data-y="#{y -= 800}" data-scale="4" data-rotate="-90"
         #app-composition
@@ -173,20 +170,9 @@ html
         h3 Service oriented architecture
         ul
           li Loosely coupled components
-          li Encourages strong contracts (they're required)
+          li Encourages strong contracts (they're a necessity)
           li Independent scaling of each service
           li API is a critical factor the increasingly important mobile component
-
-      .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
-        h3 Rails as frontend
-        ul
-          li
-            | Great at interface
-            ul
-              li Template options
-              li Asset pipeline
-          li Maintenance of state through sessions
-          li Security considerations: XSS/CSRF/etc.
 
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
         h3 Rails as frontend
@@ -212,18 +198,17 @@ html
 
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
         h3 Sinatra as API
-        pre
-          code.language-ruby
-            | get "/facts/:id" do |id|
-                fact = Fact.first(id: id.to_i) || raise(NotFound)
-                [200, encode_json(fact)]
-              end
-              
-              post "/facts" do
-                fact = Fact.new(fact_params)
-                fact.save
-                [201, encode_json(fact)]
-              end
+        pre.language-ruby
+          | get "/facts/:id" do |id|
+              fact = Fact.first(id: id.to_i)
+              [200, encode_json(fact)]
+            end
+            
+            post "/facts" do
+              fact = Fact.new(fact_params)
+              fact.save
+              [201, encode_json(fact)]
+            end
         ul
           li The API's verbs and nouns are explicit
           li Beyond a trivial app, forces consideration of project structure
@@ -231,23 +216,22 @@ html
 
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
         h3 Grape as API
-        pre
-          code.language-ruby
-            | class Facts::API < Grape::API
-                version 'v0', using: :header
-                
-                resources :facts do
-                  get ":id" do
-                    fact = Fact.first(id: params[:id].to_i) || raise(NotFound)
-                    encode_json(fact)
-                  end
-                
-                  post do
-                    fact = Fact.create(fact_params)
-                    encode_json(fact)
-                  end
+        pre.language-ruby
+          | class Facts::API < Grape::API
+              version 'v0', using: :header
+              
+              resources :facts do
+                get ":id" do
+                  fact = Fact.first(id: params[:id].to_i)
+                  encode_json(fact)
+                end
+              
+                post do
+                  fact = Fact.create(fact_params)
+                  encode_json(fact)
                 end
               end
+            end
         ul
           li Patterns for versioning, parameter validation and coercion, and endpoint descriptions
 
@@ -295,17 +279,16 @@ html
       .step.floating data-x="#{x}" data-y="#{y += 850}" data-rotate-y="45"
         h3 We started with this.
         p But we don't recommend it.
-        pre
-          code.language-ruby
-            | class AppsController < ApplicationController
-                def index
-                  @apps = if production?
-                    @api.get_apps
-                  else
-                    []
-                  end
+        pre.language-ruby
+          | class AppsController < ApplicationController
+              def index
+                @apps = if production?
+                  @api.get_apps
+                else
+                  []
                 end
               end
+            end
 
       .step.slide data-x="#{x}" data-y="#{y += 850}" data-rotate-y="45"
         h3 excon-artifice
@@ -313,27 +296,27 @@ html
           li Patches Excon to route calls to a Rack app
           li Based on Wycat's Artifice, that does the same thing for Net::HTTP
           li Easy stubbing for test purposes
-        pre
-          code.language-ruby
-            | stub(Config).billing_api { "https://billing-api.localhost" }
-              stub(Config).process_api { "https://process-api.localhost" }
-              
-              # stub with fully functional Rack apps
-              Artifice::Excon.activate_for(Config.billing_api, BillingAPIStub.new)
-              Artifice::Excon.activate_for(Config.process_api, ProcessAPIStub.new)
+        pre.language-ruby
+          | stub(Config).billing_api { "https://billing-api.localhost" }
+            stub(Config).process_api { "https://process-api.localhost" }
+            
+            # stub with fully functional Rack apps
+            Artifice::Excon.activate_for(Config.billing_api,
+              BillingAPIStub.new)
+            Artifice::Excon.activate_for(Config.process_api,
+              ProcessAPIStub.new)
 
       .step.slide data-x="#{x}" data-y="#{y += 850}" data-rotate-y="45"
         h3 And you get Rack apps!
-        pre
-          code.language-bash
-            | web:         thin start -R config.ru -p $PORT
-              billing_api: thin start -R stubs/billing_api.ru -p $PORT
-              process_api: thin start -R stubs/process_api.ru -p $PORT
+        pre.language-bash
+          | web:         thin start -R config.ru -p $PORT
+            billing_api: thin start -R stubs/billing_api.ru -p $PORT
+            process_api: thin start -R stubs/process_api.ru -p $PORT
         p These apps are platform deployable.
 
       .step.slide data-x="#{x}" data-y="#{y += 850}" data-rotate-y="45"
         h3 Platform
-        p Use Heroku. Obviously.
+        p Use Heroku. It's obviously the right decision.
 
       .step.slide data-x="#{x}" data-y="#{y += 850}" data-rotate-y="45"
         h3 ... but if you can't
