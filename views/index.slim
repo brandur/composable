@@ -13,7 +13,7 @@ html
         p @brandur
       .step data-x="#{x}" data-y="#{y += 2000}" data-scale="2"
         #a-tale-of-composition
-          h3 A Tale of<br>Composition
+          h2 A Tale of<br>Composition
       .step.slide data-x="#{x}" data-y="#{y += 600}"
         h3 Heroku's API Team
         ul
@@ -254,17 +254,66 @@ html
           pre
             | --> Ruby (psmgr)       --> Ruby (API)   --> Ruby (Dashboard)
               --> Erlang (logplex)                    --> Scala (Manager API) --> Ruby (Manager web)
-      / overview
-      .step data-x="2000" data-y="2000" data-scale="8" data-rotate="-90"
-
-      /.step data-x="-1000" data-y="-1500"
-        p Aren't you just <b>bored</b> with all those slides-based presentations?
-      /.step data-x="0" data-y="-1500"
-        p Don't you think that presentations given <strong>in modern browsers</strong> shouldn't <strong>copy the limits</strong> of 'classic' slide decks?
-      /.step data-x="1000" data-y="-1500"
-        p Would you like to <strong>impress your audience</strong> with <strong>stunning visualization</strong> of your talk?
-      /.step data-x="1500" data-y="-1000" data-scale="5"
-        p This one is big.
+      .step data-x="#{x += 1000}" data-y="#{y}" data-scale="2"
+        #lessons-learnt
+          h2 Lessons Learnt
+      .step.slide data-x="#{x}" data-y="#{y += 850}"
+        h3 Stubs
+        ul
+          li More pieces in the system make development and testing harder
+          li You've just composed your apps to streamline your work; setup should also be streamlined
+      .step.floating data-x="#{x}" data-y="#{y += 850}"
+        p We started with this.
+        pre
+          code.language-ruby
+            | class AppsController < ApplicationController
+                def index
+                  @apps = if production?
+                    @api.get_apps
+                  else
+                    []
+                  end
+                end
+              end
+      .step.slide data-x="#{x}" data-y="#{y += 850}"
+        h3 excon-artifice
+        ul
+          li Patches Excon to route calls to a Rack app
+          li Based on Wycat's Artifice, that does the same thing for Net::HTTP
+          li Easy stubbing for test purposes
+        pre
+          code.language-ruby
+            | stub(Config).billing_api { "https://billing-api.localhost" }
+              stub(Config).process_api { "https://process-api.localhost" }
+              
+              # stub with fully functional Rack apps
+              Artifice::Excon.activate_for(Config.billing_api, BillingAPIStub.new)
+              Artifice::Excon.activate_for(Config.process_api, ProcessAPIStub.new)
+      .step.slide data-x="#{x}" data-y="#{y += 850}"
+        h3 And you get Rack apps!
+        pre
+          code.language-bash
+            | web:         thin start -R config.ru -e $RACK_ENV -p $PORT
+              billing_api: thin start -R stubs/billing_api.ru -e $RACK_ENV -p $PORT
+              process_api: thin start -R stubs/process_api.ru -e $RACK_ENV -p $PORT
+        p These apps are platform deployable.
+      .step.slide data-x="#{x}" data-y="#{y += 850}"
+        h3 Platform
+        p Use Heroku. Obviously.
+      .step.slide data-x="#{x}" data-y="#{y += 850}"
+        h3 ... but if you can't
+        ul
+          li The pain to deploy a new app must be low
+          li The pain to deploy a new app formation should be low
+          li 
+            | Easy reconfiguration
+            ul
+              li Web can point to a production API or a deployed stub
+      .step.floating data-x="#{x}" data-y="#{y += 850}" data-rotate="45"
+        #about
+          h3 @brandur
+          p brandur@mutelight.org
+      .step#overview data-x="1000" data-y="6500" data-scale="6" data-rotate="-90"
 
     script src="/assets/application.js" type="text/javascript"
     javascript:

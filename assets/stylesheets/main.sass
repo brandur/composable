@@ -6,8 +6,11 @@ body
   font-size: 40px
   line-height: 1.3em
 
+h1, h2, h3
+  line-height: 1.2em
+
 h2
-  font-size: 50px
+  font-size: 70px
 
 h3
   font-size: 40px
@@ -20,6 +23,7 @@ pre
   font-size: 16px
   padding: 4px 8px
   line-height: 1.8em
+  text-align: left
   white-space: pre-wrap
 
 strong
@@ -32,7 +36,9 @@ ul
   li
     padding: 0 0 0 8px
 
+//
 // ----
+//
 
 .step
   position: relative
@@ -75,9 +81,13 @@ ul
   padding: 40px
   width: 800px
 
+//
+// ----
+//
+
 #a-tale-of-composition
 
-  h3
+  h2
     text-align: right
 
 #api-screenshot, #dashboard-screenshot, #manager-screenshot
@@ -89,7 +99,6 @@ ul
   -ms-border-radius: 30px
   -o-border-radius: 30px
   border-radius: 30px
-
 
 #api-screenshot
 
@@ -117,5 +126,19 @@ ul
 
   h2
     font-size: 80px
-    line-height: 1.2em
     text-align: center
+
+#lessons-learnt
+
+#about
+  text-align: left
+
+#overview
+  display: none
+
+/*
+ * pointer to make other steps clickable
+ */
+.impress-on-overview .step
+  opacity: 1
+  cursor: pointer
