@@ -326,9 +326,9 @@ html
         h3 And you get Rack apps!
         pre
           code.language-bash
-            | web:         thin start -R config.ru -e $RACK_ENV -p $PORT
-              billing_api: thin start -R stubs/billing_api.ru -e $RACK_ENV -p $PORT
-              process_api: thin start -R stubs/process_api.ru -e $RACK_ENV -p $PORT
+            | web:         thin start -R config.ru -p $PORT
+              billing_api: thin start -R stubs/billing_api.ru -p $PORT
+              process_api: thin start -R stubs/process_api.ru -p $PORT
         p These apps are platform deployable.
 
       .step.slide data-x="#{x}" data-y="#{y += 850}" data-rotate-y="45"
