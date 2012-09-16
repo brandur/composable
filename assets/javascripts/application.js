@@ -1,5 +1,5 @@
 //= require impress
-//= require jquery-1.7.2
+//= require jquery.min
 //= require prettify.min
 //= require jquery.syntaxhighlighter
 //= require main
