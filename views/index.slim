@@ -160,14 +160,30 @@ html
         #manager-screenshot
 
       .step.slide data-x="#{x}" data-y="#{y += 850}"
-        h3 A good API is a reusable API
-        ul
-          li
-            | Manager is further composed into two tiers
-            ul
-              li API
-              li Web
-          li Core's API separately consumed by Dashboard, Manager, and the CLI
+        h3 Deeper Composition
+        #deeper-composition
+          #tier-container.diagram
+            #tier1 Manager Web
+            #tier2 Manager API
+            #tier3 Core API
+          ul
+            li
+              | Manager is further composed into two tiers
+              ul
+                li API
+                li Web
+            li Manager's API layer injects additional business logic built on underlying primitives: teams & organizations
+
+      .step.slide data-x="#{x}" data-y="#{y += 850}"
+        #reusable-api
+          h3 A good API is a reusable API
+          #tier-container.diagram
+            #consumer Dashboard
+            #consumer CLI
+            #consumer Manager
+            #api Core API
+          ul
+            li Core's API separately consumed by Dashboard, Manager, and the CLI
 
       .step#app-composition data-x="#{x += 1000}" data-y="#{y -= 800}" data-scale="4" data-rotate="-90"
         h2 App<br>Composition

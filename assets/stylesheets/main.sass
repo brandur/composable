@@ -87,6 +87,9 @@ ul.notes
 .impress-enabled .step.active
   opacity: 1
 
+.diagram
+  font-family: "Lucida Grande", sans-serif
+
 .floating
   font-size: 40px
   padding: 40px
@@ -156,6 +159,48 @@ ul.notes
 
   background-image: url("/assets/manager.png")
   height: 605px
+
+#deeper-composition
+
+  #tier-container
+    float: right
+    margin-left: 30px
+
+    #tier1, #tier2, #tier3
+      background: #fff
+      border: 1px solid #cecece
+      height: 70px
+      padding: 15px 0 0 0
+      text-align: center
+      vertical-align: middle
+      width: 220px
+
+    #tier1, #tier2
+      background: #bbddff
+
+    #tier2, #tier3
+      border-top: 0
+
+#reusable-api
+
+  #tier-container
+
+    #consumer, #api
+      background: #fff
+      border: 1px solid #cecece
+      height: 70px
+      padding: 15px 0 0 0
+      text-align: center
+      vertical-align: middle
+
+    #consumer
+      background: #bbddff
+      float: left
+      width: 33%
+
+    #api
+      border-top: 0
+      clear: both
 
 #app-composition
   opacity: 1
