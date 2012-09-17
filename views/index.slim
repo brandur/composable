@@ -11,8 +11,13 @@ html
     #impress data-transition-duration="500"
       - x, y = 0, 0
 
-      .step data-x="#{x}" data-y="#{y}" data-scale="2"
+      /.step data-x="#{x}" data-y="#{y}" data-scale="2"
         p @brandur
+
+      .step data-x="#{x}" data-y="#{y += 2000}" data-scale="2"
+        #title.floating
+          h1 Post-Rails? Composable Applications with a First-class API
+          p @brandur
 
       .step#agenda data-x="#{x}" data-y="#{y += 2000}" data-scale="2"
         .floating
@@ -192,7 +197,7 @@ html
             ul
               li Template options
               li Asset pipeline
-          li Maintenance of state through sessions
+          li Maintenance of state through cookies + sessions
           li Security considerations: XSS/CSRF/etc.
 
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
@@ -208,6 +213,10 @@ html
 
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
         h3 Sinatra as API
+        /
+          Notes:
+
+          * Jose Valim's InlineRoutes -- https://gist.github.com/3717973
         pre.language-ruby
           | get "/facts/:id" do |id|
               fact = Fact.first(id: id.to_i)
@@ -223,6 +232,7 @@ html
           li The API's verbs and nouns are explicit
           li Beyond a trivial app, forces consideration of project structure
           li Use the exact Rack middleware stack you need
+          /li 
 
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
         h3 Grape as API
@@ -345,8 +355,7 @@ html
             li * <strong>Stunning</strong> effects by <a href="http://bartaz.github.com/impress.js">Impress.js</a>
             li * Powered by <strong>Heroku</strong>; <a href="https://github.com/brandur/composable">source code</a>
 
-      //.step#overview data-x="1000" data-y="10500" data-scale="6" data-rotate="-90"
-      .step#overview data-x="1000" data-y="10500" data-scale="9" data-rotate="-90"
+      .step#overview data-x="1000" data-y="12500" data-scale="9" data-rotate="-90"
 
     script src="/assets/application.js" type="text/javascript"
     javascript:
