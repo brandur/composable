@@ -1,3 +1,10 @@
+$serifs: georgia, serif
+$sans_serifs: "Lucida Grande", sans-serif
+
+//
+// ----
+//
+
 a
   color: #000
 
@@ -5,7 +12,7 @@ h3, p, pre, ul
   margin: 30px 0
 
 body
-  font-family: georgia, serif
+  font-family: $serifs
   font-size: 40px
   line-height: 1.3em
 
@@ -19,6 +26,7 @@ h2
   font-size: 70px
 
 h3
+  font-family: $sans_serifs
   font-size: 40px
 
 pre
@@ -170,6 +178,7 @@ ul.notes
 #butc
 
   h3
+    font-family: $serifs
     font-size: 120px
     margin: 60px 0
 
@@ -236,8 +245,10 @@ ul.notes
       background: #bbddff
 
     #tier2, #tier3
-      background: #ddeeff
       border-top: 0
+
+    #tier3
+      background: #ddeeff
 
 #reusable-api
 
@@ -272,6 +283,9 @@ ul.notes
 
 #about
   text-align: left
+
+  h3
+    font-family: $serifs
 
 #overview
   display: none

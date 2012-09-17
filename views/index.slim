@@ -162,7 +162,7 @@ html
 
       .step data-x="#{x}" data-y="#{y += 850}"
         #equation.floating
-          p Not the final win, but we'll take it.
+          p Not the final win,<br>but one we'll take gladly.
           #equation-container
             .element-container
               #big
@@ -319,6 +319,10 @@ html
 
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
         h3 Happiness
+        /
+          Notes:
+
+          * Internal self-service means fewer people bothering each other
         ul
           li Designers and frontend people get to work on a thin web app
           li Backend people don't have to worry about CSS floats
@@ -328,11 +332,13 @@ html
         h3 Flexibility
         ul
           li Use an agnostic protocol (stay HTTP)
-          li Then use the right tool for the right job
-          / @todo: real diagram
-          pre
-            | --> Ruby (psmgr)       --> Ruby (API)   --> Ruby (Dashboard)
-              --> Erlang (logplex)                    --> Scala (Manager API) --> Ruby (Manager web)
+          li
+            | Then use the right tool for the right job
+            ul
+              li Core API: <strong>Rails</strong>
+              li Dashboard: <strong>Rails</strong>
+              li Manager API: <strong>Scala</strong>
+              li Manager Web: <strong>Sinatra + Backbone</strong>
 
       .step#lessons-learnt data-x="#{x += 1000}" data-y="#{y}" data-scale="2" data-rotate-y="45"
         h2 Lessons Learnt
