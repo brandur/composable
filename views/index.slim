@@ -54,11 +54,23 @@ html
         #api-screenshot
 
       .step.slide data-x="#{x}" data-y="#{y += 850}"
-        h3 Core
-        ul
-          li A Rails app
-          li Then, a <strong>BIG RAILS APP</strong>
-          li Severe impact on development velocity and effort
+        #meet-core
+          h3 Meet Core
+          ul
+            li A Rails app
+            li Then, a <strong>BIG RAILS APP</strong>
+            li Severe impact on development velocity and effort
+          #growth-container
+            .element-container
+              #small-core
+                img src="/assets/rails_100.png"
+            .element-container
+              #growth-arrow
+                p
+                  | &rarr;
+            .element-container
+              #small-core
+                img src="/assets/rails_240.png"
 
       .step.slide data-x="#{x}" data-y="#{y += 850}"
         h3 We broke things out.
@@ -95,11 +107,9 @@ html
       .step.slide data-x="#{x}" data-y="#{y += 850}"
         h3 Dashboard Implementation
         ul
-          li Rails
+          li <strong>Rails</strong>
           li
-            | Heroku.rb
-            ul
-              li The same backend that handles API calls for the CLI
+            | <strong>Heroku.rb</strong>: the same backend that handles API calls for the CLI
             pre.language-ruby
               | # GET /apps
                 def get_apps
@@ -136,19 +146,41 @@ html
                 &lt;/script&gt;
 
       .step.slide data-x="#{x}" data-y="#{y += 850}"
-        h3 Metrics
-        ul
-          li
-            | Dashboard
-            ul
-              li + 4500 LOCs (3200 Ruby + 1300 templates)
-          li
-            | Core
-            ul
-              li 66k LOCs (61k Ruby + 5k templates)
-              li Down to 55k LOCs (55k Ruby)
-              li - 11k (~15%)
-              li Not the final win, but we'll take it
+        #metrics
+          h3 Metrics
+          ul
+            li
+              | Dashboard
+              ul
+                li <span class="plus"><strong>+4500</strong></span> LOCs (3200 Ruby + 1300 templates)
+            li
+              | Core
+              ul
+                li 66k LOCs (61k Ruby + 5k templates)
+                li Down to 55k LOCs (55k Ruby)
+                li <span class="minus"><strong>-11k</strong></span> LOCs (<strong>~15%</strong>)
+
+      .step data-x="#{x}" data-y="#{y += 850}"
+        #equation.floating
+          p Not the final win, but we'll take it.
+          #equation-container
+            .element-container
+              #big
+                img src="/assets/rails_240.png"
+            .element-container
+              #equals
+                p
+                  | =
+            .element-container
+              #small
+                img src="/assets/rails_100.png"
+            .element-container
+              #plus
+                p
+                  | +
+            .element-container
+              #smaller
+                img src="/assets/rails_180.png"
 
       .step.slide data-x="#{x}" data-y="#{y += 850}"
         h3 Our API is now an API
