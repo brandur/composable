@@ -12,10 +12,11 @@ html
       - x, y = 0, 0
 
       .step data-x="#{x}" data-y="#{y}" data-scale="2"
-        p @brandur
-        p @todo: HEROKU LOGO
-        ul.presenter-notes
-          li Explain Heroku
+        .floating
+          p @brandur
+          p @todo: HEROKU LOGO
+          ul.presenter-notes
+            li Explain Heroku
 
       .step data-x="#{x}" data-y="#{y += 2000}" data-scale="2"
         #title.floating
@@ -37,8 +38,9 @@ html
             li
               a href="#lessons-learnt" Lessons learnt
 
-      .step#a-tale-of-composition data-x="#{x}" data-y="#{y += 2000}" data-scale="2"
-        h2 A Tale of<br>Composition
+      .step data-x="#{x}" data-y="#{y += 2000}" data-scale="2"
+        #a-tale-of-composition.floating
+          h2 A Tale of<br>Composition
 
       .step.slide data-x="#{x}" data-y="#{y += 600}"
         h3 Heroku's API Team
@@ -62,11 +64,10 @@ html
 
       .step.slide data-x="#{x}" data-y="#{y += 850}"
         #meet-core
+          ul.presenter-notes
+            li Our "monorail"
+            li Wrap our heads around the entire app
           h3 Meet Core
-          /
-            @todo
-
-            * Wrap our heads around the entire app
           ul
             li A Rails app
             li Then, a <strong>BIG RAILS APP</strong>
@@ -262,7 +263,6 @@ html
           li Loosely coupled components
           li Encourages strong contracts (they're a necessity)
           li Independent scaling of each service
-          li API is a critical factor the increasingly important mobile component
 
       .step data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
         #not-a-new-idea.floating
@@ -275,8 +275,11 @@ html
 
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
         h3 First-class APIs
+        ul.presenter-notes
+          li API is a critical factor the increasingly important mobile component
         ul
-          li We're not post-Rails, but we did move it up a layer
+          li API design considered at least as much as web
+          li Framework conducive to API development
 
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
         h3 Rails as frontend
@@ -291,6 +294,8 @@ html
 
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
         h3 Rails as API
+        ul.presenter-notes
+          li We're not post-Rails, but we did move it up a layer
         ul
           li Helpers/views become less useful
           li ActiveRecord pretty good, but it's now decoupled
@@ -384,16 +389,20 @@ html
               li Manager Web: <strong>Sinatra + Backbone</strong>
 
       .step#lessons-learnt data-x="#{x += 1000}" data-y="#{y}" data-scale="2" data-rotate-y="45"
-        h2 Lessons Learnt
+        h2 Lessons Learn(ing)
 
       .step.slide data-x="#{x}" data-y="#{y += 850}" data-rotate-y="45"
         h3 Stubs
+        ul.presenter-notes
+          li Do I have to set up ten different apps to get an app bootstrapped?
         ul
           li More pieces in the system make development and testing harder
           li You've just composed your apps to streamline your work; setup should also be streamlined
 
       .step.floating data-x="#{x}" data-y="#{y += 850}" data-rotate-y="45"
         h3 We started with this.
+        ul.presenter-notes
+          li This is not exactly what it looked like, but it's the right idea.
         p But we don't recommend it.
         pre.language-ruby
           | class AppsController < ApplicationController
@@ -442,6 +451,7 @@ html
         h3 Platform Requirements
         ul.presenter-notes
           li Takeaway: don't let ops team control design decisions because platform is hard
+          li We deploy a lot of stuff to Heroku, but creating a new kernel app isn't too bad either
         ul
           li Creating a new app should be trivial
           li Pain to deploy a new app formation should be low
