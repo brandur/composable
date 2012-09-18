@@ -68,6 +68,12 @@ ul.notes
     font-size: 24px
     line-height: 1.5em
 
+ul.presenter-notes
+  color: #369
+  //display: none
+  font-size: 20px
+  line-height: 1.2em
+
 //
 // ----
 //
@@ -126,6 +132,15 @@ ul.notes
 //
 
 #title
+
+#title-2
+
+  .stricken:after
+    content: ""
+    background: #a00
+    height: 5px
+    position: absolute
+    width: 100px
 
 #agenda
 
@@ -287,6 +302,33 @@ ul.notes
   h2
     font-size: 80px
     text-align: center
+
+#composability
+
+  .vertical-element
+    clear: both
+    float: left
+    height: 70px
+    text-align: center
+    width: 150px
+
+  .layer
+    border: 1px solid #cecece
+    background: #ddeeff
+
+  .layer-consumers
+    float: left
+    overflow: text-wrap
+
+#not-a-new-idea
+
+  .publication
+    font-family: $sans_serifs
+    font-size: 30px
+    line-height: 1.2em
+
+  .year
+    font-size: 100px
 
 #lessons-learnt
 

@@ -11,13 +11,20 @@ html
     #impress data-transition-duration="500"
       - x, y = 0, 0
 
-      /.step data-x="#{x}" data-y="#{y}" data-scale="2"
+      .step data-x="#{x}" data-y="#{y}" data-scale="2"
         p @brandur
+        p @todo: HEROKU LOGO
+        ul.presenter-notes
+          li Explain Heroku
 
       .step data-x="#{x}" data-y="#{y += 2000}" data-scale="2"
         #title.floating
           h1 Post-Rails? Composable Applications with a First-class API
-          p @brandur
+
+      .step data-x="#{x}" data-y="#{y += 2000}" data-scale="2"
+        #title-2.floating
+          h1 <span class="stricken">Post-Rails?</span> Composable Applications with a First-class API
+          p @todo: add trollface
 
       .step#agenda data-x="#{x}" data-y="#{y += 2000}" data-scale="2"
         .floating
@@ -56,6 +63,10 @@ html
       .step.slide data-x="#{x}" data-y="#{y += 850}"
         #meet-core
           h3 Meet Core
+          /
+            @todo
+
+            * Wrap our heads around the entire app
           ul
             li A Rails app
             li Then, a <strong>BIG RAILS APP</strong>
@@ -231,13 +242,19 @@ html
         h2 App<br>Composition
 
       .step.slide data-x="#{x}" data-y="#{y -= 1600}" data-rotate="-90"
-        h3 Composability
-        / @todo: real diagram
-        pre
-          | API     <-      CLI + developers
-             |
-             v
-            Web     <-      Other users
+        #composability
+          h3 Composability
+          / @todo: real diagram
+          .vertical-element.layer
+            | $CL$ <strong>API</strong>
+          .layer-consumers
+            | &larr; CLI, Dashboard, Manager API + developers
+          .vertical-element
+            | &darr;
+          .vertical-element.layer
+            | $CL$ <strong>Web</strong>
+          .layer-consumers
+            | &larr; Our dear users
 
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
         h3 Service oriented architecture
@@ -246,6 +263,15 @@ html
           li Encourages strong contracts (they're a necessity)
           li Independent scaling of each service
           li API is a critical factor the increasingly important mobile component
+
+      .step data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
+        #not-a-new-idea.floating
+          p Not a new idea.
+          p.publication Service-Oriented Architecture: Concepts, Technology, and Design
+          p.year <sup>*</sup>2005
+          ul.presenter-notes
+            li Eight principles from industry
+            li Published by Thomas Erl
 
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
         h3 First-class APIs
@@ -275,21 +301,21 @@ html
               li A routing DSL is an unneeded layer of abstraction
 
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
-        h3 <code>Rails-API</code> as API
+        h3 <code>rails-api</code> as API
+        ul.presenter-notes
+          li Like everything in the Ruby world, there's a project for that
         ul
           li Plugin by Yehuda Katz, José Valim, Carlos Antonio da Silva, and Santiago Pastorino
           li Originally in Rails core, but reverted
           li Selection of just the middleware needed for an API
           li Drops views, helpers, and assets
-          li Rails familiarity
+          li Familiarity: <strong>it's like a second home</strong>
 
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
         h3 Sinatra as API
-        /
-          Notes:
-
-          * José Valim's InlineRoutes -- https://gist.github.com/3717973
-          * For full stack control
+        ul.presenter-notes
+          li José Valim's InlineRoutes -- https://gist.github.com/3717973
+          li For full stack control
         pre.language-ruby
           | get "/facts/:id" do |id|
               fact = Fact.first(id: id.to_i)
@@ -305,7 +331,6 @@ html
           li The API's verbs and nouns are explicit
           li Beyond a trivial app, forces consideration of project structure
           li Use the exact Rack middleware stack you need
-          /li 
 
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
         h3 Grape as API
@@ -339,10 +364,8 @@ html
 
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
         h3 Happiness
-        /
-          Notes:
-
-          * Internal self-service means fewer people bothering each other
+        ul.presenter-notes
+          li Internal self-service means fewer people bothering each other
         ul
           li Designers and frontend people get to work on a thin web app
           li Backend people don't have to worry about CSS floats
@@ -387,7 +410,7 @@ html
         h3 Artifice
         ul
           li Routes network calls to a Rack app
-          li Wycat's <code>artifice</code> that does Net::HTTP; we're using <code>excon-artifice</code>
+          li Wycat's <code>artifice</code> that does Net::HTTP; we're using <a href="https://github.com/brandur/excon-artifice"><code>excon-artifice</code></a>
           li Easy stubbing for test purposes
         pre.language-ruby
           | stub(Config).billing_api { "https://billing-api.localhost" }
@@ -407,14 +430,20 @@ html
             process_api: thin start -R stubs/process_api.ru -p $PORT
         p These apps are platform deployable.
 
+      .step data-x="#{x}" data-y="#{y += 850}" data-rotate-y="45"
+        .floating
+          p Teams should own their own API stubs.
+          ul.presenter-notes
+            li This is one we're still thinking about
+            li API change --> you could run against all known internal test suites
+            li We're also thinking about how smart the stubs should be? A very dumb version of the service they're stubbing or the most basic stub possible.
+
       .step.slide data-x="#{x}" data-y="#{y += 850}" data-rotate-y="45"
         h3 Platform Requirements
-        /
-          Notes:
-
-          * Takeaway: don't let ops team control design decisions because platform is hard
+        ul.presenter-notes
+          li Takeaway: don't let ops team control design decisions because platform is hard
         ul
-          li Pain to deploy a new app must be low
+          li Creating a new app should be trivial
           li Pain to deploy a new app formation should be low
           li 
             | Easy reconfiguration
@@ -434,7 +463,7 @@ html
             li * <strong>Stunning</strong> effects by <a href="http://bartaz.github.com/impress.js">Impress.js</a>
             li * Powered by <strong>Heroku</strong>; <a href="https://github.com/brandur/composable">source code</a>
 
-      .step#overview data-x="1000" data-y="12500" data-scale="9" data-rotate="-90"
+      .step#overview data-x="1000" data-y="15500" data-scale="9" data-rotate="-90"
 
     script src="/assets/application.js" type="text/javascript"
     javascript:
