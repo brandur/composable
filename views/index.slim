@@ -80,6 +80,16 @@ html
           li Addons
           li Kernel layer infrastructure management
           li Domain management
+        pre
+          |      |
+                 V
+                Core -----> Billing
+                 |
+                 V
+                Core -----> Process Management
+                 |
+                 V
+                Core
 
       .step.floating data-x="#{x}" data-y="#{y += 850}" data-scale="2"
         #butc
@@ -100,7 +110,7 @@ html
           li But we're an API, why should the web component get special treatment?
 
       .step data-x="#{x}" data-y="#{y += 850}"
-        .floating
+        #introducing-dashboard.floating
           h3 Introducing Dashboard
         #dashboard-screenshot
 
@@ -187,7 +197,7 @@ html
         p @todo: diagram of divergence
 
       .step data-x="#{x}" data-y="#{y += 850}"
-        .floating
+        #heroku-manager.floating
           h3 Heroku Manager
         #manager-screenshot
 
@@ -238,6 +248,11 @@ html
           li API is a critical factor the increasingly important mobile component
 
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
+        h3 First-class APIs
+        ul
+          li We're not post-Rails, but we did move it up a layer
+
+      .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
         h3 Rails as frontend
         ul
           li
@@ -260,11 +275,21 @@ html
               li A routing DSL is an unneeded layer of abstraction
 
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
+        h3 <code>Rails-API</code> as API
+        ul
+          li Plugin by Yehuda Katz, José Valim, Carlos Antonio da Silva, and Santiago Pastorino
+          li Originally in Rails core, but reverted
+          li Selection of just the middleware needed for an API
+          li Drops views, helpers, and assets
+          li Rails familiarity
+
+      .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
         h3 Sinatra as API
         /
           Notes:
 
-          * Jose Valim's InlineRoutes -- https://gist.github.com/3717973
+          * José Valim's InlineRoutes -- https://gist.github.com/3717973
+          * For full stack control
         pre.language-ruby
           | get "/facts/:id" do |id|
               fact = Fact.first(id: id.to_i)
@@ -302,11 +327,6 @@ html
             end
         ul
           li Patterns for versioning, parameter validation and coercion, and endpoint descriptions
-
-      .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
-        h3 First-class APIs
-        ul
-          li We're not post-Rails, but we did move it up a layer
 
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
         h3 Organization
@@ -364,10 +384,10 @@ html
             end
 
       .step.slide data-x="#{x}" data-y="#{y += 850}" data-rotate-y="45"
-        h3 excon-artifice
+        h3 Artifice
         ul
-          li Patches Excon to route calls to a Rack app
-          li Based on Wycat's Artifice, that does the same thing for Net::HTTP
+          li Routes network calls to a Rack app
+          li Wycat's <code>artifice</code> that does Net::HTTP; we're using <code>excon-artifice</code>
           li Easy stubbing for test purposes
         pre.language-ruby
           | stub(Config).billing_api { "https://billing-api.localhost" }
@@ -388,11 +408,11 @@ html
         p These apps are platform deployable.
 
       .step.slide data-x="#{x}" data-y="#{y += 850}" data-rotate-y="45"
-        h3 Platform
-        p Use Heroku. It's obviously the right decision.
+        h3 Platform Requirements
+        /
+          Notes:
 
-      .step.slide data-x="#{x}" data-y="#{y += 850}" data-rotate-y="45"
-        h3 ... but if you can't
+          * Takeaway: don't let ops team control design decisions because platform is hard
         ul
           li Pain to deploy a new app must be low
           li Pain to deploy a new app formation should be low
@@ -400,6 +420,11 @@ html
             | Easy reconfiguration
             ul
               li Web can point to a production API or a deployed stub
+
+      .step data-x="#{x}" data-y="#{y += 850}" data-rotate-y="45"
+        .floating
+          p I know somebody that does all this.
+          p <strong>@todo: Heroku logo</strong>
 
       .step.floating data-x="#{x}" data-y="#{y += 850}" data-rotate="45" data-rotate-y="45"
         #about
