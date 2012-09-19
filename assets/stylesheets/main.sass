@@ -1,5 +1,5 @@
 $serifs: georgia, serif
-$sans_serifs: "Lucida Grande", sans-serif
+$sans_serifs: 'proxima-nova', "Lucida Grande", sans-serif
 
 //
 // ----
@@ -136,12 +136,8 @@ ul.presenter-notes
 
 #title-2
 
-  .stricken:after
-    content: ""
-    background: #a00
-    height: 5px
-    position: absolute
-    width: 100px
+  .redacted
+    background: #000
 
 #agenda
 
@@ -151,7 +147,8 @@ ul.presenter-notes
 #a-tale-of-composition
 
   h2
-    font-family: handwritten
+    color: #373
+    font-family: cursive
     text-align: right
 
 #api-screenshot, #dashboard-screenshot, #manager-screenshot
@@ -307,20 +304,16 @@ ul.presenter-notes
 
 #composability
 
-  .vertical-element
-    clear: both
-    float: left
-    height: 70px
+  p
     text-align: center
-    width: 150px
 
   .layer
     border: 1px solid #cecece
     background: #ddeeff
-
-  .layer-consumers
-    float: left
-    overflow: text-wrap
+    display: block
+    font-family: $sans_serifs
+    font-size: 40px
+    padding: 10px
 
 #not-a-new-idea
 
@@ -331,6 +324,47 @@ ul.presenter-notes
 
   .year
     font-size: 100px
+
+#misfloat
+
+  p
+    position: absolute
+    font-size: 50px
+
+  #backend-people
+    right: 0
+    top: 18px
+
+  #think-about-floats
+    right: 0
+    top: 90px
+
+#organization
+
+  .people
+    font-size: 50px
+
+    .arrow
+      color: #888
+
+    .backend
+
+    .designer
+      color: #336699
+
+    .frontend
+      color: #22a
+
+    .team
+      background: #ddeeff
+      border: #ccc solid 2px
+      padding: 4px 12px 10px 12px
+
+      -web-kit-border-radius: 15px
+      -moz-border-radius: 15px
+      -ms-border-radius: 15px
+      -o-border-radius: 15px
+      border-radius: 15px
 
 #lessons-learnt
 

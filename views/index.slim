@@ -13,8 +13,10 @@ html
 
       .step data-x="#{x}" data-y="#{y}" data-scale="2"
         .floating
-          p @brandur
-          p @todo: HEROKU LOGO
+          p
+            | @brandur
+          p
+            img src="/assets/heroku-120.png"
           ul.presenter-notes
             li Explain Heroku
 
@@ -24,7 +26,11 @@ html
 
       .step data-x="#{x}" data-y="#{y += 2000}" data-scale="2"
         #title-2.floating
-          h1 <span class="stricken">Post-Rails?</span> Composable Applications with a First-class API
+          h1
+            span.redacted Post-Rails?
+            |  Composable Applications with a First-class API
+          ul.presenter-notes
+            li Using app and service interchangeably here
           p @todo: add trollface
 
       .step#agenda data-x="#{x}" data-y="#{y += 2000}" data-scale="2"
@@ -90,7 +96,6 @@ html
           li Process management
           li Billing
           li Addons
-          li Kernel layer infrastructure management
           li Domain management
         pre
           |      |
@@ -204,9 +209,9 @@ html
               #smaller
                 img src="/assets/rails_180.png"
 
-      .step.slide data-x="#{x}" data-y="#{y += 850}"
-        h3 Our API is now an API
-        p @todo: diagram of divergence
+      .step data-x="#{x}" data-y="#{y += 850}"
+        .floating
+          p Our API is now an API.
 
       .step data-x="#{x}" data-y="#{y += 850}"
         #heroku-manager.floating
@@ -245,20 +250,20 @@ html
       .step.slide data-x="#{x}" data-y="#{y -= 1600}" data-rotate="-90"
         #composability
           h3 Composability
-          / @todo: real diagram
-          .vertical-element.layer
-            | $CL$ <strong>API</strong>
-          .layer-consumers
-            | &larr; CLI, Dashboard, Manager API + developers
-          .vertical-element
-            | &darr;
-          .vertical-element.layer
-            | $CL$ <strong>Web</strong>
-          .layer-consumers
-            | &larr; Our dear users
+          p
+            span.layer ☁ <strong>API</strong><br>
+            span.layer-consumers CLI, Dashboard, Manager API + developers
+          p &darr;
+          p
+            span.layer ☁ <strong>Web</strong><br>
+            span.layer-consumers Our web users
 
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
         h3 Service oriented architecture
+        ul.presenter-notes
+          li SOA
+          li Let's use a buzzword!
+          li Users also benefit from these strong contracts
         ul
           li Loosely coupled components
           li Encourages strong contracts (they're a necessity)
@@ -276,10 +281,12 @@ html
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
         h3 First-class APIs
         ul.presenter-notes
-          li API is a critical factor the increasingly important mobile component
+          li All I mean by first-class is that it's not added as an afterthought or default, like in the responds_to block.
+          li Why would you ever want to promote this? API is a critical factor the increasingly important mobile component
         ul
           li API design considered at least as much as web
           li Framework conducive to API development
+          li Let's talk options
 
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
         h3 Rails as frontend
@@ -309,12 +316,15 @@ html
         h3 <code>rails-api</code> as API
         ul.presenter-notes
           li Like everything in the Ruby world, there's a project for that
+        pre
+          | gem install rails-api
+            rails-api new facts_api
         ul
           li Plugin by Yehuda Katz, José Valim, Carlos Antonio da Silva, and Santiago Pastorino
           li Originally in Rails core, but reverted
           li Selection of just the middleware needed for an API
           li Drops views, helpers, and assets
-          li Familiarity: <strong>it's like a second home</strong>
+          li Familiarity
 
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
         h3 Sinatra as API
@@ -359,22 +369,46 @@ html
           li Patterns for versioning, parameter validation and coercion, and endpoint descriptions
 
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
-        h3 Organization
-        ul
-          li
-            | Smaller and more specialized teams
-            ul
-              li <strong>Before:</strong> three backend people, a designer, and a handful of frontend engineers
-              li <strong>After:</strong> API is three backend people; Dashboard is a designer and a frontend engineer
+        #organization
+          h3 Organization
+          ul.presenter-notes
+            li In many cases where a service was broken off, it was done by someone who cared about that portion, and that team member would go with it
+          ul
+            li
+              | Smaller and more specialized teams
+              ul
+                li
+                  | <strong>Before:</strong> three backend people, a designer, and a handful of frontend engineers
+                  p.people
+                    span.team
+                      span.backend ⚥ ⚥ ⚥&nbsp
+                      span.designer ⚥&nbsp;
+                      span.frontend ⚥
+                li
+                  | <strong>After:</strong> API is three backend people; Dashboard is a designer and a frontend engineer
+                  p.people
+                    span.team
+                      span.backend ⚥ ⚥ ⚥
+                    span.arrow  &harr;&nbsp;
+                    span.team
+                      span.designer ⚥&nbsp;
+                      span.frontend ⚥
 
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
         h3 Happiness
         ul.presenter-notes
+          li Frontend engineers not burdened by technical complexity of backend
           li Internal self-service means fewer people bothering each other
         ul
           li Designers and frontend people get to work on a thin web app
-          li Backend people don't have to worry about CSS floats
+          li Same goes for the backend people
           li Internal self-service
+
+      .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
+        h3 And the best part?
+        #misfloat
+          p#backend-people Backend people<br>don't
+          p#think-about-floats have to think<br>about CSS floats
 
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
         h3 Flexibility
@@ -389,7 +423,7 @@ html
               li Manager Web: <strong>Sinatra + Backbone</strong>
 
       .step#lessons-learnt data-x="#{x += 1000}" data-y="#{y}" data-scale="2" data-rotate-y="45"
-        h2 Lessons Learn(ing)
+        h2 Lessons Learn(t/ing)
 
       .step.slide data-x="#{x}" data-y="#{y += 850}" data-rotate-y="45"
         h3 Stubs
@@ -419,7 +453,7 @@ html
         h3 Artifice
         ul
           li Routes network calls to a Rack app
-          li Wycat's <code>artifice</code> that does Net::HTTP; we're using <a href="https://github.com/brandur/excon-artifice"><code>excon-artifice</code></a>
+          li Yehuda Katz's <code>artifice</code> that does Net::HTTP; we're using <a href="https://github.com/brandur/excon-artifice"><code>excon-artifice</code></a>
           li Easy stubbing for test purposes
         pre.language-ruby
           | stub(Config).billing_api { "https://billing-api.localhost" }
@@ -448,7 +482,7 @@ html
             li We're also thinking about how smart the stubs should be? A very dumb version of the service they're stubbing or the most basic stub possible.
 
       .step.slide data-x="#{x}" data-y="#{y += 850}" data-rotate-y="45"
-        h3 Platform Requirements
+        h3 Platform
         ul.presenter-notes
           li Takeaway: don't let ops team control design decisions because platform is hard
           li We deploy a lot of stuff to Heroku, but creating a new kernel app isn't too bad either
@@ -463,7 +497,8 @@ html
       .step data-x="#{x}" data-y="#{y += 850}" data-rotate-y="45"
         .floating
           p I know somebody that does all this.
-          p <strong>@todo: Heroku logo</strong>
+          p
+            img src="/assets/heroku-300.png"
 
       .step.floating data-x="#{x}" data-y="#{y += 850}" data-rotate="45" data-rotate-y="45"
         #about
