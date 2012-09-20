@@ -26,15 +26,19 @@ html
 
       .step data-x="#{x}" data-y="#{y += 2000}" data-scale="2"
         #title-2.floating
+          h1 Post-Rails? Composable Applications with a First-class API
+          p.troll
+            img src="/assets/trollface-200.png"
+            br
+            | Problem?
+
+      .step data-x="#{x}" data-y="#{y += 2000}" data-scale="2"
+        #title-3.floating
           h1
             span.redacted Post-Rails?
             |  Composable Applications with a First-class API
           ul.presenter-notes
             li Using app and service interchangeably here
-          p.troll
-            img src="/assets/trollface-200.png"
-            br
-            | Problem?
 
       .step#agenda data-x="#{x}" data-y="#{y += 2000}" data-scale="2"
         .floating
@@ -95,6 +99,9 @@ html
 
       .step.slide data-x="#{x}" data-y="#{y += 850}"
         h3 We broke things out.
+        ul.presenter-notes
+          li Identify a logical layer
+          li Talk about advantages of this technique later
         ul
           li Process management
           li Billing
@@ -105,6 +112,8 @@ html
         #butc
           h3 BUTC
           p <strong>B</strong>reak <strong>u</strong>p <strong>t</strong>he <strong>c</strong>ore
+          ul.presenter-notes
+            li Many companies run into this problem, one is our parent Salesforce
 
       .step.slide data-x="#{x}" data-y="#{y += 850}"
         h3 Still too big
@@ -205,6 +214,8 @@ html
       .step data-x="#{x}" data-y="#{y += 850}"
         .floating
           p Our API is now an API.
+          ul.presenter-notes
+            li The responds_to block is no longer needed.
 
       .step data-x="#{x}" data-y="#{y += 850}"
         #heroku-manager.floating
@@ -250,11 +261,13 @@ html
           p
             span.layer ☁ <strong>API</strong><br>
             span.layer-consumers CLI, Dashboard, Manager API + developers
+          p &darr;
+          p
+            span.layer ☁ <strong>Internal Services</strong><br>
 
       .step.slide data-x="#{x}" data-y="#{y -= 850}" data-rotate="-90"
-        h3 Service oriented architecture
+        h3 Service Oriented Architecture (SOA)
         ul.presenter-notes
-          li SOA
           li Let's use a buzzword!
           li Users also benefit from these strong contracts
         ul
@@ -301,7 +314,7 @@ html
           li ActiveRecord pretty good, but it's now decoupled
           li <code>ActiveRecord::Serialization#to_json</code> is a bad idea when strong contracts are important
           li
-            | APIs are about verbs and nouns
+            | RESTful APIs are about verbs and nouns
             ul
               li A routing DSL is an unneeded layer of abstraction
 
@@ -446,8 +459,8 @@ html
         h3 Artifice
         ul
           li Routes network calls to a Rack app
-          li Yehuda Katz's <code>artifice</code> that does Net::HTTP; we're using <a href="https://github.com/brandur/excon-artifice"><code>excon-artifice</code></a>
-          li Easy stubbing for test purposes
+          li Yehuda Katz's <code>artifice</code> that does Net::HTTP; we're using <a href="https://github.com/brandur/excon-artifice"><code>excon-artifice</code></a> (also allows  multiple stubs)
+          li Easy stubbing for testing and development
         pre.language-ruby
           | stub(Config).billing_api { "https://billing-api.localhost" }
             stub(Config).process_api { "https://process-api.localhost" }
@@ -499,7 +512,7 @@ html
           p brandur@mutelight.org
           ul.notes
             li * Thank-you <strong>Frozen Rails</strong>!!
-            li * <strong>Stunning</strong> effects by <a href="http://bartaz.github.com/impress.js">Impress.js</a>
+            li * Effects by <a href="http://bartaz.github.com/impress.js">Impress.js</a>
             li * Powered by <strong>Heroku</strong>; <a href="https://github.com/brandur/composable">source code</a>
 
       .step#overview data-x="1000" data-y="15500" data-scale="9" data-rotate="-90"
