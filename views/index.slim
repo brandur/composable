@@ -62,8 +62,10 @@ html
             | If you've used the CLI, you've used the API
             pre
               | heroku list
+                heroku create
             pre
               | GET https://api.heroku.com/apps
+                POST https://api.heroku.com/apps
           li
             | Try it!
             pre
@@ -161,7 +163,7 @@ html
       .step.slide data-x="#{x}" data-y="#{y += 850}"
         h3 Where's the fat client?
         ul
-          li We enjoy the Ruby experience
+          li We enjoy the Ruby + Rails experience
           li
             | Puts all the elements in place for a single page app
             ul
