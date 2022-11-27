@@ -1,0 +1,634 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+ * v2.0 | 20110126
+ * License: none (public domain)
+ */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Pretty printing styles. Used with prettify.js.
+ *
+ * Name:	Stanley Ng
+ * Email: 	stanleyhlng@googlegroups.com
+ * 
+ */
+
+.pln {
+  color: #bd3613;
+}
+
+.str {
+  color: #269186;
+}
+
+.kwd {
+  color: #859900;
+}
+
+.com {
+  color: #586175;
+  font-style: italic;
+}
+
+.typ {
+  color: #b58900;
+}
+
+.lit {
+  color: #2aa198;
+}
+
+.pun {
+  color: #839496;
+}
+
+.opn {
+  color: #839496;
+}
+
+.clo {
+  color: #839496;
+}
+
+.tag {
+  color: #268bd2;
+}
+
+.atn {
+  color: #586175;
+}
+
+.atv {
+  color: #2aa198;
+}
+
+.dec {
+  color: #268bd2;
+}
+
+.var {
+  color: #268bd2;
+}
+
+.fun {
+  color: #FF0000;
+}
+
+/* Put a border around prettyprinted code snippets. */
+/*
+pre.prettyprint {
+  background-color: #fdf6e3;
+  padding: 10px;
+  border: 1px solid #E1E1E8; }
+*/
+
+/* Specify class=linenums on a pre to get line numbering */
+ol.linenums {
+  color: #4c666c;
+  margin: 0 0 0 40px;
+}
+
+ol.linenums li {
+  line-height: 18px;
+  padding-left: 12px;
+}
+
+a {
+  color: black;
+}
+
+h3,
+p,
+pre,
+ul {
+  margin: 30px 0;
+}
+
+body {
+  font-family: georgia, serif;
+  font-size: 40px;
+  line-height: 1.3em;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2em;
+}
+
+h1 {
+  font-size: 80px;
+}
+
+h2 {
+  font-size: 70px;
+}
+
+h3 {
+  font-family: "proxima-nova", "Lucida Grande", sans-serif;
+  font-size: 40px;
+}
+
+pre,
+code {
+  background: #f8f8f8;
+  border: 1px solid #cccccc;
+  color: black;
+  font-family: Monaco, "Lucida Console", "Bitstream Vera Sans Mono", Courier, monospace;
+  font-size: 18px;
+  padding: 8px 12px;
+  line-height: 1.8em;
+  text-align: left;
+  white-space: pre-wrap;
+}
+
+strong {
+  font-weight: bold;
+}
+
+ol,
+ul {
+  padding: 0 0 0 40px;
+}
+
+ol li,
+ul li {
+  padding: 0 0 0 8px;
+  text-align: left;
+}
+
+ol ol,
+ol ul,
+ul ol,
+ul ul {
+  margin: 0;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+ul {
+  list-style-type: disc;
+}
+
+ul.notes {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul.notes li {
+  font-size: 24px;
+  line-height: 1.5em;
+}
+
+ul.presenter-notes {
+  color: #336699;
+  display: none;
+  font-size: 20px;
+  line-height: 1.2em;
+  text-align: left;
+}
+
+.step {
+  position: relative;
+  margin: 20px auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.impress-enabled .step {
+  margin: 0;
+  opacity: 0.3;
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -ms-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s;
+}
+
+.impress-enabled .step.active {
+  opacity: 1;
+}
+
+.diagram {
+  font-family: "Lucida Grande", sans-serif;
+}
+
+.floating {
+  font-size: 40px;
+  padding: 40px;
+  text-align: center;
+  width: 720px;
+}
+
+.floating h3 {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.floating p {
+  margin: 20px 0;
+}
+
+.slide {
+  background-color: #efefef;
+  font-size: 30px;
+  padding: 40px;
+  width: 800px;
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+}
+
+#agenda h3 {
+  text-align: left;
+}
+
+#a-study-of-composition h2 {
+  font-family: cursive;
+  text-align: right;
+}
+
+#api-screenshot,
+#dashboard-screenshot,
+#manager-screenshot {
+  width: 800px;
+  -web-kit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+  border-radius: 30px;
+}
+
+#api-screenshot {
+  background-image: url("./assets/api.png");
+  height: 558px;
+}
+
+#meet-core #growth-container .element-container {
+  float: left;
+}
+
+#meet-core #growth-container .element-container #small-core,
+#meet-core #growth-container .element-container #growth-arrow,
+#meet-core #growth-container .element-container #big-core {
+  display: table-cell;
+  height: 311px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#meet-core #growth-container .element-container #small-core {
+  width: 300px;
+}
+
+#meet-core #growth-container .element-container #growth-arrow {
+  font-size: 60px;
+  width: 120px;
+}
+
+#meet-core #growth-container .element-container #big-core {
+  width: 300px;
+}
+
+#butc h3 {
+  font-family: georgia, serif;
+  font-size: 160px;
+  margin: 30px 0;
+}
+
+#introducing-dashboard h3 {
+  font-family: georgia, serif;
+}
+
+#dashboard-screenshot {
+  background-image: url("./assets/dashboard.png");
+  height: 708px;
+}
+
+#metrics .plus {
+  color: #00aa00;
+}
+
+#metrics .minus {
+  color: #aa0000;
+}
+
+#equation #equation-container .element-container {
+  float: left;
+}
+
+#equation #equation-container .element-container #big,
+#equation #equation-container .element-container #equals,
+#equation #equation-container .element-container #small,
+#equation #equation-container .element-container #plus,
+#equation #equation-container .element-container #smaller {
+  display: table-cell;
+  height: 400px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#equation #equation-container .element-container #equals,
+#equation #equation-container .element-container #plus {
+  font-size: 60px;
+  width: 100px;
+}
+
+#equation #equation-container .element-container #big {
+  width: 240px;
+}
+
+#equation #equation-container .element-container #small {
+  width: 100px;
+}
+
+#equation #equation-container .element-container #smaller {
+  width: 180px;
+}
+
+#heroku-manager h3 {
+  font-family: georgia, serif;
+}
+
+#manager-screenshot {
+  background-image: url("./assets/manager.png");
+  height: 605px;
+}
+
+#deeper-composition #tier-container {
+  float: right;
+  margin-left: 30px;
+}
+
+#deeper-composition #tier-container #tier1,
+#deeper-composition #tier-container #tier2,
+#deeper-composition #tier-container #tier3 {
+  background: white;
+  border: 1px solid #cecece;
+  height: 70px;
+  padding: 15px 0 0 0;
+  text-align: center;
+  width: 220px;
+}
+
+#deeper-composition #tier-container #tier1,
+#deeper-composition #tier-container #tier2 {
+  background: #bbddff;
+}
+
+#deeper-composition #tier-container #tier2,
+#deeper-composition #tier-container #tier3 {
+  border-top: 0;
+}
+
+#deeper-composition #tier-container #tier3 {
+  background: #ddeeff;
+}
+
+#reusable-api #tier-container #consumer,
+#reusable-api #tier-container #api {
+  background: white;
+  border: 1px solid #cecece;
+  height: 70px;
+  padding: 15px 0 0 0;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#reusable-api #tier-container #consumer {
+  background: #bbddff;
+  float: left;
+  width: 33%;
+}
+
+#reusable-api #tier-container #api {
+  background: #ddeeff;
+  border-top: 0;
+  clear: both;
+}
+
+#app-composition {
+  opacity: 1;
+}
+
+#app-composition h2 {
+  font-size: 80px;
+  text-align: center;
+}
+
+#composability p {
+  text-align: center;
+}
+
+#composability .layer {
+  border: 1px solid #cecece;
+  background: #ddeeff;
+  display: block;
+  font-family: "proxima-nova", "Lucida Grande", sans-serif;
+  font-size: 40px;
+  padding: 10px;
+}
+
+#not-a-new-idea .publication {
+  font-family: "proxima-nova", "Lucida Grande", sans-serif;
+  font-size: 30px;
+  line-height: 1.2em;
+}
+
+#not-a-new-idea .year {
+  font-size: 100px;
+}
+
+#misfloat p {
+  position: absolute;
+  font-size: 50px;
+}
+
+#misfloat #backend-people {
+  right: 0;
+  top: 18px;
+}
+
+#misfloat #think-about-floats {
+  font-size: 60px;
+  right: -60px;
+  top: 90px;
+}
+
+#organization .people {
+  font-size: 50px;
+}
+
+#organization .people .arrow {
+  color: #888888;
+}
+
+#organization .people .designer {
+  color: #336699;
+}
+
+#organization .people .frontend {
+  color: #2222aa;
+}
+
+#organization .people .team {
+  background: #ddeeff;
+  border: #cccccc solid 2px;
+  padding: 4px 12px 10px 12px;
+  -web-kit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+  border-radius: 15px;
+}
+
+#about {
+  text-align: left;
+}
+
+#about h3 {
+  font-family: georgia, serif;
+}
+
+#overview {
+  display: none;
+}
+
+/* pointer to make other steps clickable
+ */
+.impress-on-overview .step {
+  opacity: 1;
+  cursor: pointer;
+}
