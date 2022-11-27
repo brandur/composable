@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html style="height: 100%;">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Composable Apps With a First-class API</title>
+  <link href="./assets/application.css" media="screen" rel="stylesheet" type="text/css">
+  <meta content="width=device-width, minimum-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+</head>
+
+<body class="impress-supported impress-enabled impress-on-step-1" style="height: 100%; overflow: hidden;">
+  <div data-transition-duration="500" id="impress"
+    style="position: absolute; transform-origin: left top; transition: all 0ms ease-in-out 0ms; transform-style: preserve-3d; top: 50%; left: 50%; transform: perspective(2000px) scale(0.5);">
+    <div
+      style="position: absolute; transform-origin: left top; transition: all 0ms ease-in-out 0ms; transform-style: preserve-3d; transform: rotateZ(0deg) rotateY(0deg) rotateX(0deg) translate3d(0px, 0px, 0px);">
+      <div class="step active present" data-scale="2" data-x="0" data-y="0" id="step-1"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(2); transform-style: preserve-3d;">
+        <div class="floating">
+          <p>@brandur</p>
+          <p>
+            <img src="./assets/heroku-120.png">
+          </p>
+          <ul class="presenter-notes">
+            <li>Explain Heroku</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step future" data-scale="2" data-x="0" data-y="2000" id="step-2"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(0px, 2000px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(2); transform-style: preserve-3d;">
+        <div class="floating" id="title">
+          <h1>Post-Rails? Composable Applications with a First-class API</h1>
+        </div>
+      </div>
+      <div class="step future" data-scale="2" data-x="0" data-y="4000" id="agenda"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(0px, 4000px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(2); transform-style: preserve-3d;">
+        <div class="floating">
+          <h3>Agenda</h3>
+          <ol>
+            <li>
+              <a href="#a-study-of-composition">A study of composition</a>
+            </li>
+            <li>
+              <a href="#app-composition">App composition</a>
+            </li>
+            <li>
+              <a href="#lessons-learnt">Lessons learnt</a>
+            </li>
+          </ol>
+        </div>
+      </div>
+      <div class="step future" data-scale="2" data-x="0" data-y="6000" id="step-4"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(0px, 6000px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(2); transform-style: preserve-3d;">
+        <div class="floating" id="a-study-of-composition">
+          <h2>A Study of<br>Composition</h2>
+        </div>
+      </div>
+      <div class="step slide future" data-x="0" data-y="6600" id="step-5"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(0px, 6600px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1); transform-style: preserve-3d;">
+        <h3>Heroku's API Team</h3>
+        <ul>
+          <li>If you've used the CLI, you've used the API
+            <pre>heroku list
+heroku create</pre>
+            <pre>GET https://api.heroku.com/apps
+POST https://api.heroku.com/apps</pre>
+          </li>
+          <li>Try it!
+            <pre># you can your API key from ~/.netrc
+curl --user ":$API_KEY" -i https://api.heroku.com/apps</pre>
+          </li>
+        </ul>
+      </div>
+      <div class="step future" data-x="0" data-y="7450" id="step-6"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(0px, 7450px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1); transform-style: preserve-3d;">
+        <div class="floating">
+          <p>We were also <strong>in charge of this</strong>.</p>
+        </div>
+        <div id="api-screenshot"></div>
+      </div>
+      <div class="step slide future" data-x="0" data-y="8300" id="step-7"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(0px, 8300px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1); transform-style: preserve-3d;">
+        <div id="meet-core">
+          <ul class="presenter-notes">
+            <li>Our "monorail"</li>
+            <li>Wrap our heads around the entire app</li>
+          </ul>
+          <h3>Meet Core</h3>
+          <ul>
+            <li>A Rails app</li>
+            <li>Then, a <strong>BIG RAILS APP</strong></li>
+            <li>Severe impact on development velocity and effort</li>
+          </ul>
+          <div id="growth-container">
+            <div class="element-container">
+              <div id="small-core">
+                <img src="./assets/rails_100.png">
+              </div>
+            </div>
+            <div class="element-container">
+              <div id="growth-arrow">
+                <p>→</p>
+              </div>
+            </div>
+            <div class="element-container">
+              <div id="small-core">
+                <img src="./assets/rails_240.png">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="step slide future" data-x="0" data-y="9150" id="step-8"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(0px, 9150px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1); transform-style: preserve-3d;">
+        <h3>We broke things out.</h3>
+        <ul class="presenter-notes">
+          <li>Identify a logical layer</li>
+          <li>Talk about advantages of this technique later</li>
+        </ul>
+        <ul>
+          <li>Process management</li>
+          <li>Billing</li>
+          <li>Addons</li>
+          <li>Domains</li>
+        </ul>
+      </div>
+      <div class="step floating future" data-scale="2" data-x="0" data-y="10000" id="step-9"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(0px, 10000px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(2); transform-style: preserve-3d;">
+        <div id="butc">
+          <h3>BUTC</h3>
+          <p><strong>B</strong>reak <strong>u</strong>p <strong>t</strong>he <strong>c</strong>ore</p>
+          <ul class="presenter-notes">
+            <li>Many companies run into this problem, one is our parent Salesforce</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step slide future" data-x="0" data-y="10850" id="step-10"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(0px, 10850px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1); transform-style: preserve-3d;">
+        <h3>Still too big</h3>
+        <ul>
+          <li>The goal is something small and agile</li>
+          <li>Rails taught us to design an API like this:
+            <pre class="language-ruby prettyprint highlight lang-ruby prettyprint-has"
+              style="overflow: hidden; white-space: pre-wrap; max-height: none;"><span class="pln">responds_to </span><span class="kwd">do</span><span class="pln"> </span><span class="pun">|</span><span class="pln">format</span><span class="pun">|</span><span class="pln"><br>&nbsp; format</span><span class="pun">.</span><span class="pln">json </span><span class="pun">{</span><span class="pln"> render </span><span class="pun">:</span><span class="pln">json </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="lit">@apps</span><span class="pln"> </span><span class="pun">}</span><span class="pln"><br>&nbsp; format</span><span class="pun">.</span><span class="pln">html<br></span><span class="kwd">end</span></pre>
+          </li>
+          <li>But we're an API, why should the web component get special treatment?</li>
+        </ul>
+      </div>
+      <div class="step future" data-x="0" data-y="11700" id="step-11"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(0px, 11700px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1); transform-style: preserve-3d;">
+        <div class="floating" id="introducing-dashboard">
+          <h3>Introducing Dashboard</h3>
+        </div>
+        <div id="dashboard-screenshot"></div>
+      </div>
+      <div class="step slide future" data-x="0" data-y="12550" id="step-12"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(0px, 12550px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1); transform-style: preserve-3d;">
+        <h3>Dashboard Implementation</h3>
+        <ul>
+          <li><strong>Rails</strong></li>
+          <li><strong>Heroku.rb</strong>: the same backend that handles API calls for the CLI
+            <pre class="language-ruby prettyprint highlight lang-ruby prettyprint-has"
+              style="overflow: hidden; white-space: pre-wrap; max-height: none;"><span class="com"># GET /apps</span><span class="pln"><br></span><span class="kwd">def</span><span class="pln"> get_apps<br>&nbsp; request</span><span class="pun">(</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="pun">:</span><span class="pln">expects &nbsp;</span><span class="pun">=&gt;</span><span class="pln"> </span><span class="lit">200</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="pun">:</span><span class="pln">method &nbsp; </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="pun">:</span><span class="kwd">get</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="pun">:</span><span class="pln">path &nbsp; &nbsp; </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="str">"/apps"</span><span class="pln"><br>&nbsp; </span><span class="pun">)</span><span class="pln"><br></span><span class="kwd">end</span></pre>
+          </li>
+        </ul>
+      </div>
+      <div class="step slide future" data-x="0" data-y="13400" id="step-13"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(0px, 13400px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1); transform-style: preserve-3d;">
+        <p>API calls happen on the backend.</p>
+        <pre class="language-ruby prettyprint highlight lang-ruby prettyprint-has"
+          style="overflow: hidden; white-space: pre-wrap; max-height: none;"><span class="kwd">class</span><span class="pln"> </span><span class="typ">AppsController</span><span class="pln"> </span><span class="pun">&lt;</span><span class="pln"> </span><span class="typ">ApplicationController</span><span class="pln"><br>&nbsp; </span><span class="kwd">def</span><span class="pln"> index<br>&nbsp; &nbsp; </span><span class="lit">@apps</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="lit">@api</span><span class="pun">.</span><span class="pln">get_apps<br>&nbsp; </span><span class="kwd">end</span><span class="pln"><br></span><span class="kwd">end</span></pre>
+      </div>
+      <div class="step slide future" data-x="0" data-y="14250" id="step-14"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(0px, 14250px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1); transform-style: preserve-3d;">
+        <h3>Where's the fat client?</h3>
+        <ul>
+          <li>We enjoy the Ruby + Rails experience</li>
+          <li>Puts all the elements in place for a single page app<ul>
+              <li>Graceful degredation</li>
+            </ul>
+          </li>
+          <li>Backbone still recommends bootstrapped models
+            <pre class="language-javascript prettyprint highlight lang-javascript prettyprint-has"
+              style="overflow: hidden; white-space: pre-wrap; max-height: none;"><span class="tag">&lt;script&gt;</span><span class="pln"><br>&nbsp; </span><span class="kwd">var</span><span class="pln"> </span><span class="typ">Apps</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Backbone</span><span class="pun">.</span><span class="typ">Collection</span><span class="pun">;</span><span class="pln"><br>&nbsp; </span><span class="typ">Apps</span><span class="pun">.</span><span class="pln">reset</span><span class="pun">(&lt;%=</span><span class="pln"> </span><span class="lit">@apps</span><span class="pun">.</span><span class="pln">to_json </span><span class="pun">%&gt;);</span><span class="pln"><br></span><span class="tag">&lt;/script&gt;</span></pre>
+          </li>
+        </ul>
+      </div>
+      <div class="step slide future" data-x="0" data-y="15100" id="step-15"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(0px, 15100px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1); transform-style: preserve-3d;">
+        <div id="metrics">
+          <h3>Metrics</h3>
+          <ul>
+            <li>Dashboard<ul>
+                <li><span class="plus"><strong>+4500</strong></span> LOCs (3200 Ruby + 1300 templates)</li>
+              </ul>
+            </li>
+            <li>Core<ul>
+                <li>66k LOCs (61k Ruby + 5k templates)</li>
+                <li>Down to 55k LOCs (55k Ruby)</li>
+                <li><span class="minus"><strong>-11k</strong></span> LOCs (<strong>~15%</strong>)</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="step future" data-x="0" data-y="15950" id="step-16"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(0px, 15950px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1); transform-style: preserve-3d;">
+        <div class="floating" id="equation">
+          <p>Not the final win,<br>but one we'll take gladly.</p>
+          <div id="equation-container">
+            <div class="element-container">
+              <div id="big">
+                <img src="./assets/rails_240.png">
+              </div>
+            </div>
+            <div class="element-container">
+              <div id="equals">
+                <p>=</p>
+              </div>
+            </div>
+            <div class="element-container">
+              <div id="small">
+                <img src="./assets/rails_100.png">
+              </div>
+            </div>
+            <div class="element-container">
+              <div id="plus">
+                <p>+</p>
+              </div>
+            </div>
+            <div class="element-container">
+              <div id="smaller">
+                <img src="./assets/rails_180.png">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="step future" data-x="0" data-y="16800" id="step-17"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(0px, 16800px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1); transform-style: preserve-3d;">
+        <div class="floating">
+          <p>Our API is now an API.</p>
+          <ul class="presenter-notes">
+            <li>The responds_to block is no longer needed.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step future" data-x="0" data-y="17650" id="step-18"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(0px, 17650px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1); transform-style: preserve-3d;">
+        <div class="floating" id="heroku-manager">
+          <h3>Heroku Manager</h3>
+        </div>
+        <div id="manager-screenshot"></div>
+      </div>
+      <div class="step slide future" data-x="0" data-y="18500" id="step-19"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(0px, 18500px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1); transform-style: preserve-3d;">
+        <h3>Deeper Composition</h3>
+        <div id="deeper-composition">
+          <div class="diagram" id="tier-container">
+            <div id="tier1">Manager Web</div>
+            <div id="tier2">Manager API</div>
+            <div id="tier3">Core API</div>
+          </div>
+          <ul>
+            <li>Manager is further composed into two tiers<ul>
+                <li>API</li>
+                <li>Web</li>
+              </ul>
+            </li>
+            <li>Manager's API layer injects additional business logic built on underlying primitives: teams &amp;
+              organizations</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step slide future" data-x="0" data-y="19350" id="step-20"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(0px, 19350px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1); transform-style: preserve-3d;">
+        <div id="reusable-api">
+          <h3>A good API is a reusable API</h3>
+          <div class="diagram" id="tier-container">
+            <div id="consumer">Dashboard</div>
+            <div id="consumer">CLI</div>
+            <div id="consumer">Manager</div>
+            <div id="api">Core API</div>
+          </div>
+          <ul>
+            <li>Core's API separately consumed by Dashboard, Manager, and the CLI</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step future" data-rotate="-90" data-scale="4" data-x="1000" data-y="18550" id="app-composition"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(1000px, 18550px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-90deg) scale(4); transform-style: preserve-3d;">
+        <h2>App<br>Composition</h2>
+      </div>
+      <div class="step slide future" data-rotate="-90" data-x="1000" data-y="16950" id="step-22"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(1000px, 16950px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-90deg) scale(1); transform-style: preserve-3d;">
+        <div id="composability">
+          <h3>Composability</h3>
+          <p>
+            <span class="layer">☁ <strong>Web</strong><br></span><span class="layer-consumers">Our web users</span>
+          </p>
+          <p>↓</p>
+          <p>
+            <span class="layer">☁ <strong>API</strong><br></span><span class="layer-consumers">CLI, Dashboard, Manager
+              API + developers</span>
+          </p>
+          <p>↓</p>
+          <p>
+            <span class="layer">☁ <strong>Internal Services</strong><br></span>
+          </p>
+        </div>
+      </div>
+      <div class="step slide future" data-rotate="-90" data-x="1000" data-y="16100" id="step-23"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(1000px, 16100px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-90deg) scale(1); transform-style: preserve-3d;">
+        <h3>Service Oriented Architecture (SOA)</h3>
+        <ul class="presenter-notes">
+          <li>Let's use a buzzword!</li>
+          <li>Users also benefit from these strong contracts</li>
+        </ul>
+        <ul>
+          <li>Loosely coupled components</li>
+          <li>Encourages strong contracts (they're a necessity)</li>
+          <li>Independent scaling of each service</li>
+        </ul>
+      </div>
+      <div class="step future" data-rotate="-90" data-x="1000" data-y="15250" id="step-24"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(1000px, 15250px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-90deg) scale(1); transform-style: preserve-3d;">
+        <div class="floating" id="not-a-new-idea">
+          <p>Not a new idea.</p>
+          <p class="publication">Service-Oriented Architecture: Concepts, Technology, and Design</p>
+          <p class="year"><sup>*</sup>2005</p>
+          <ul class="presenter-notes">
+            <li>Eight principles from industry</li>
+            <li>Published by Thomas Erl</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step slide future" data-rotate="-90" data-x="1000" data-y="14400" id="step-25"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(1000px, 14400px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-90deg) scale(1); transform-style: preserve-3d;">
+        <h3>First-class APIs</h3>
+        <ul class="presenter-notes">
+          <li>All I mean by first-class is that it's not added as an afterthought or default, like in the responds_to
+            block.</li>
+          <li>Why would you ever want to promote this? API is a critical factor the increasingly important mobile
+            component</li>
+        </ul>
+        <ul>
+          <li>API design considered at least as much as web</li>
+          <li>Framework conducive to API development</li>
+          <li>Let's talk options</li>
+        </ul>
+      </div>
+      <div class="step slide future" data-rotate="-90" data-x="1000" data-y="13550" id="step-26"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(1000px, 13550px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-90deg) scale(1); transform-style: preserve-3d;">
+        <h3>Rails as frontend</h3>
+        <ul>
+          <li>Great at interface<ul>
+              <li>Template options</li>
+              <li>Asset pipeline</li>
+            </ul>
+          </li>
+          <li>Maintenance of state through cookies + sessions</li>
+          <li>Security considerations: XSS/CSRF/etc.</li>
+        </ul>
+      </div>
+      <div class="step slide future" data-rotate="-90" data-x="1000" data-y="12700" id="step-27"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(1000px, 12700px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-90deg) scale(1); transform-style: preserve-3d;">
+        <h3>Rails as API</h3>
+        <ul class="presenter-notes">
+          <li>We're not post-Rails, but we did move it up a layer</li>
+        </ul>
+        <ul>
+          <li>Helpers/views become less useful</li>
+          <li>ActiveRecord pretty good, but it's now decoupled</li>
+          <li><code>ActiveRecord::Serialization#to_json</code> is a bad idea when strong contracts are important</li>
+          <li>RESTful APIs are about verbs and nouns<ul>
+              <li>A routing DSL is an unneeded layer of abstraction</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="step slide future" data-rotate="-90" data-x="1000" data-y="11850" id="step-28"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(1000px, 11850px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-90deg) scale(1); transform-style: preserve-3d;">
+        <h3><code>rails-api</code> as API</h3>
+        <ul class="presenter-notes">
+          <li>Like everything in the Ruby world, there's a project for that</li>
+        </ul>
+        <pre>gem install rails-api
+rails-api new facts_api</pre>
+        <ul>
+          <li>Plugin by Yehuda Katz, José Valim, Carlos Antonio da Silva, and Santiago Pastorino</li>
+          <li>Originally in Rails core, but reverted</li>
+          <li>Selection of just the middleware needed for an API</li>
+          <li>Drops views, helpers, and assets</li>
+          <li>Familiarity</li>
+        </ul>
+      </div>
+      <div class="step slide future" data-rotate="-90" data-x="1000" data-y="11000" id="step-29"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(1000px, 11000px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-90deg) scale(1); transform-style: preserve-3d;">
+        <h3>Sinatra as API</h3>
+        <ul class="presenter-notes">
+          <li>José Valim's InlineRoutes -- https://gist.github.com/3717973</li>
+          <li>For full stack control</li>
+        </ul>
+        <pre class="language-ruby prettyprint highlight lang-ruby prettyprint-has"
+          style="overflow: hidden; white-space: pre-wrap; max-height: none;"><span class="kwd">get</span><span class="pln"> </span><span class="str">"/facts/:id"</span><span class="pln"> </span><span class="kwd">do</span><span class="pln"> </span><span class="pun">|</span><span class="pln">id</span><span class="pun">|</span><span class="pln"><br>&nbsp; fact </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Fact</span><span class="pun">.</span><span class="pln">first</span><span class="pun">(</span><span class="pln">id</span><span class="pun">:</span><span class="pln"> id</span><span class="pun">.</span><span class="pln">to_i</span><span class="pun">)</span><span class="pln"><br>&nbsp; </span><span class="pun">[</span><span class="lit">200</span><span class="pun">,</span><span class="pln"> encode_json</span><span class="pun">(</span><span class="pln">fact</span><span class="pun">)]</span><span class="pln"><br></span><span class="kwd">end</span><span class="pln"><br><br>post </span><span class="str">"/facts"</span><span class="pln"> </span><span class="kwd">do</span><span class="pln"><br>&nbsp; fact </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Fact</span><span class="pun">.</span><span class="kwd">new</span><span class="pun">(</span><span class="pln">fact_params</span><span class="pun">)</span><span class="pln"><br>&nbsp; fact</span><span class="pun">.</span><span class="pln">save<br>&nbsp; </span><span class="pun">[</span><span class="lit">201</span><span class="pun">,</span><span class="pln"> encode_json</span><span class="pun">(</span><span class="pln">fact</span><span class="pun">)]</span><span class="pln"><br></span><span class="kwd">end</span></pre>
+        <ul>
+          <li>The API's verbs and nouns are explicit</li>
+          <li>Beyond a trivial app, forces consideration of project structure</li>
+          <li>Use the exact Rack middleware stack you need</li>
+        </ul>
+      </div>
+      <div class="step slide future" data-rotate="-90" data-x="1000" data-y="10150" id="step-30"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(1000px, 10150px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-90deg) scale(1); transform-style: preserve-3d;">
+        <h3>Grape as API</h3>
+        <pre class="language-ruby prettyprint highlight lang-ruby prettyprint-has"
+          style="overflow: hidden; white-space: pre-wrap; max-height: none;"><span class="kwd">class</span><span class="pln"> </span><span class="typ">Facts</span><span class="pun">::</span><span class="pln">API </span><span class="pun">&lt;</span><span class="pln"> </span><span class="typ">Grape</span><span class="pun">::</span><span class="pln">API<br>&nbsp; version </span><span class="str">'v0'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">using</span><span class="pun">:</span><span class="pln"> </span><span class="pun">:</span><span class="pln">header<br><br>&nbsp; resources </span><span class="pun">:</span><span class="pln">facts </span><span class="kwd">do</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">get</span><span class="pln"> </span><span class="str">":id"</span><span class="pln"> </span><span class="kwd">do</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; fact </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Fact</span><span class="pun">.</span><span class="pln">first</span><span class="pun">(</span><span class="pln">id</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">params</span><span class="pun">[:</span><span class="pln">id</span><span class="pun">].</span><span class="pln">to_i</span><span class="pun">)</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; encode_json</span><span class="pun">(</span><span class="pln">fact</span><span class="pun">)</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">end</span><span class="pln"><br><br>&nbsp; &nbsp; post </span><span class="kwd">do</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; fact </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Fact</span><span class="pun">.</span><span class="pln">create</span><span class="pun">(</span><span class="pln">fact_params</span><span class="pun">)</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; encode_json</span><span class="pun">(</span><span class="pln">fact</span><span class="pun">)</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">end</span><span class="pln"><br>&nbsp; </span><span class="kwd">end</span><span class="pln"><br></span><span class="kwd">end</span></pre>
+        <ul>
+          <li>Patterns for versioning, parameter validation and coercion, and endpoint descriptions</li>
+        </ul>
+      </div>
+      <div class="step slide future" data-rotate="-90" data-x="1000" data-y="9300" id="step-31"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(1000px, 9300px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-90deg) scale(1); transform-style: preserve-3d;">
+        <div id="organization">
+          <h3>Organization</h3>
+          <ul class="presenter-notes">
+            <li>In many cases where a service was broken off, it was done by someone who cared about that portion, and
+              that team member would go with it</li>
+          </ul>
+          <ul>
+            <li>Smaller and more specialized teams<ul>
+                <li><strong>Before:</strong> three backend people, a designer, and a handful of frontend engineers<p
+                    class="people">
+                    <span class="team"><span class="backend">⚥ ⚥ ⚥&nbsp;</span><span
+                        class="designer">⚥&nbsp;</span><span class="frontend">⚥</span></span>
+                  </p>
+                </li>
+                <li><strong>After:</strong> API is three backend people; Dashboard is a designer and a frontend engineer
+                  <p class="people">
+                    <span class="team"><span class="backend">⚥ ⚥ ⚥</span></span><span class="arrow"> ↔&nbsp;</span><span
+                      class="team"><span class="designer">⚥&nbsp;</span><span class="frontend">⚥</span></span>
+                  </p>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="step slide future" data-rotate="-90" data-x="1000" data-y="8450" id="step-32"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(1000px, 8450px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-90deg) scale(1); transform-style: preserve-3d;">
+        <h3>Happiness</h3>
+        <ul class="presenter-notes">
+          <li>Frontend engineers not burdened by technical complexity of backend</li>
+          <li>Internal self-service means fewer people bothering each other</li>
+        </ul>
+        <ul>
+          <li>Designers and frontend people get to work on a thin web app</li>
+          <li>Same goes for the backend people</li>
+          <li>Internal self-service</li>
+        </ul>
+      </div>
+      <div class="step slide future" data-rotate="-90" data-x="1000" data-y="7600" id="step-33"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(1000px, 7600px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-90deg) scale(1); transform-style: preserve-3d;">
+        <h3>And the best part?</h3>
+        <div id="misfloat">
+          <p id="backend-people">Backend people<br>don't</p>
+          <p id="think-about-floats">have to think<br>about CSS floats</p>
+        </div>
+      </div>
+      <div class="step slide future" data-rotate="-90" data-x="1000" data-y="6750" id="step-34"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(1000px, 6750px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-90deg) scale(1); transform-style: preserve-3d;">
+        <h3>Flexibility</h3>
+        <ul>
+          <li>Use an agnostic protocol (stay HTTP)</li>
+          <li>Then use the right tool for the right job<ul>
+              <li>Core API: <strong>Rails</strong></li>
+              <li>Dashboard: <strong>Rails</strong></li>
+              <li>Manager API: <strong>Scala</strong></li>
+              <li>Manager Web: <strong>Sinatra + Backbone</strong></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="step future" data-rotate-y="45" data-scale="2" data-x="2000" data-y="6750" id="lessons-learnt"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(2000px, 6750px, 0px) rotateX(0deg) rotateY(45deg) rotateZ(0deg) scale(2); transform-style: preserve-3d;">
+        <h2>Lessons Learn(t/ing)</h2>
+      </div>
+      <div class="step slide future" data-rotate-y="45" data-x="2000" data-y="7600" id="step-36"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(2000px, 7600px, 0px) rotateX(0deg) rotateY(45deg) rotateZ(0deg) scale(1); transform-style: preserve-3d;">
+        <h3>Stubs</h3>
+        <ul class="presenter-notes">
+          <li>Do I have to set up ten different apps to get an app bootstrapped?</li>
+        </ul>
+        <ul>
+          <li>More pieces in the system make development and testing harder</li>
+          <li>You've just composed your apps to streamline your work; setup should also be streamlined</li>
+        </ul>
+      </div>
+      <div class="step floating future" data-rotate-y="45" data-x="2000" data-y="8450" id="step-37"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(2000px, 8450px, 0px) rotateX(0deg) rotateY(45deg) rotateZ(0deg) scale(1); transform-style: preserve-3d;">
+        <h3>We started with this.</h3>
+        <ul class="presenter-notes">
+          <li>This is not exactly what it looked like, but it's the right idea.</li>
+        </ul>
+        <p>But we don't recommend it.</p>
+        <pre class="language-ruby prettyprint highlight lang-ruby prettyprint-has"
+          style="overflow: hidden; white-space: pre-wrap; max-height: none;"><span class="kwd">class</span><span class="pln"> </span><span class="typ">AppsController</span><span class="pln"> </span><span class="pun">&lt;</span><span class="pln"> </span><span class="typ">ApplicationController</span><span class="pln"><br>&nbsp; </span><span class="kwd">def</span><span class="pln"> index<br>&nbsp; &nbsp; </span><span class="lit">@apps</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">if</span><span class="pln"> production</span><span class="pun">?</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; </span><span class="lit">@api</span><span class="pun">.</span><span class="pln">get_apps<br>&nbsp; &nbsp; </span><span class="kwd">else</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; </span><span class="pun">[]</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">end</span><span class="pln"><br>&nbsp; </span><span class="kwd">end</span><span class="pln"><br></span><span class="kwd">end</span></pre>
+      </div>
+      <div class="step slide future" data-rotate-y="45" data-x="2000" data-y="9300" id="step-38"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(2000px, 9300px, 0px) rotateX(0deg) rotateY(45deg) rotateZ(0deg) scale(1); transform-style: preserve-3d;">
+        <h3>Artifice</h3>
+        <ul>
+          <li>Routes network calls to a Rack app</li>
+          <li>Yehuda Katz's <code>artifice</code> that does Net::HTTP; we're using <a
+              href="https://github.com/brandur/excon-artifice"><code>excon-artifice</code></a> (also allows multiple
+            stubs)</li>
+          <li>Easy stubbing for testing and development</li>
+        </ul>
+        <pre class="language-ruby prettyprint highlight lang-ruby prettyprint-has"
+          style="overflow: hidden; white-space: pre-wrap; max-height: none;"><span class="pln">stub</span><span class="pun">(</span><span class="typ">Config</span><span class="pun">).</span><span class="pln">billing_api </span><span class="pun">{</span><span class="pln"> </span><span class="str">"https://billing-api.localhost"</span><span class="pln"> </span><span class="pun">}</span><span class="pln"><br>stub</span><span class="pun">(</span><span class="typ">Config</span><span class="pun">).</span><span class="pln">process_api </span><span class="pun">{</span><span class="pln"> </span><span class="str">"https://process-api.localhost"</span><span class="pln"> </span><span class="pun">}</span><span class="pln"><br><br></span><span class="com"># stub with fully functional Rack apps</span><span class="pln"><br></span><span class="typ">Artifice</span><span class="pun">::</span><span class="typ">Excon</span><span class="pun">.</span><span class="pln">activate_for</span><span class="pun">(</span><span class="typ">Config</span><span class="pun">.</span><span class="pln">billing_api</span><span class="pun">,</span><span class="pln"><br>&nbsp; </span><span class="typ">BillingAPIStub</span><span class="pun">.</span><span class="kwd">new</span><span class="pun">)</span><span class="pln"><br></span><span class="typ">Artifice</span><span class="pun">::</span><span class="typ">Excon</span><span class="pun">.</span><span class="pln">activate_for</span><span class="pun">(</span><span class="typ">Config</span><span class="pun">.</span><span class="pln">process_api</span><span class="pun">,</span><span class="pln"><br>&nbsp; </span><span class="typ">ProcessAPIStub</span><span class="pun">.</span><span class="kwd">new</span><span class="pun">)</span></pre>
+      </div>
+      <div class="step slide future" data-rotate-y="45" data-x="2000" data-y="10150" id="step-39"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(2000px, 10150px, 0px) rotateX(0deg) rotateY(45deg) rotateZ(0deg) scale(1); transform-style: preserve-3d;">
+        <h3>And you get Rack apps!</h3>
+        <pre class="language-bash prettyprint highlight lang-bash prettyprint-has"
+          style="overflow: hidden; white-space: pre-wrap; max-height: none;"><span class="pln">web</span><span class="pun">:</span><span class="pln"> &nbsp; &nbsp; &nbsp; &nbsp; thin start </span><span class="pun">-</span><span class="pln">R config</span><span class="pun">.</span><span class="pln">ru </span><span class="pun">-</span><span class="pln">p $PORT<br>billing_api</span><span class="pun">:</span><span class="pln"> thin start </span><span class="pun">-</span><span class="pln">R stubs</span><span class="pun">/</span><span class="pln">billing_api</span><span class="pun">.</span><span class="pln">ru </span><span class="pun">-</span><span class="pln">p $PORT<br>process_api</span><span class="pun">:</span><span class="pln"> thin start </span><span class="pun">-</span><span class="pln">R stubs</span><span class="pun">/</span><span class="pln">process_api</span><span class="pun">.</span><span class="pln">ru </span><span class="pun">-</span><span class="pln">p $PORT</span></pre>
+        <p>These apps are platform deployable.</p>
+      </div>
+      <div class="step future" data-rotate-y="45" data-x="2000" data-y="11000" id="step-40"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(2000px, 11000px, 0px) rotateX(0deg) rotateY(45deg) rotateZ(0deg) scale(1); transform-style: preserve-3d;">
+        <div class="floating">
+          <p>Teams should own their own API stubs.</p>
+          <ul class="presenter-notes">
+            <li>This is one we're still thinking about</li>
+            <li>API change --&gt; you could run against all known internal test suites</li>
+            <li>We're also thinking about how smart the stubs should be? A very dumb version of the service they're
+              stubbing or the most basic stub possible.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step slide future" data-rotate-y="45" data-x="2000" data-y="11850" id="step-41"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(2000px, 11850px, 0px) rotateX(0deg) rotateY(45deg) rotateZ(0deg) scale(1); transform-style: preserve-3d;">
+        <h3>Platform</h3>
+        <ul class="presenter-notes">
+          <li>Takeaway: don't let ops team control design decisions because platform is hard</li>
+          <li>We deploy a lot of stuff to Heroku, but creating a new kernel app isn't too bad either</li>
+        </ul>
+        <ul>
+          <li>Creating a new app should be trivial</li>
+          <li>Pain to deploy a new app formation should be low</li>
+          <li>Easy reconfiguration<ul>
+              <li>Web can point to a production API or a deployed stub</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="step future" data-rotate-y="45" data-x="2000" data-y="12700" id="step-42"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(2000px, 12700px, 0px) rotateX(0deg) rotateY(45deg) rotateZ(0deg) scale(1); transform-style: preserve-3d;">
+        <div class="floating">
+          <p>I know somebody that does all this.</p>
+          <p>
+            <img src="./assets/heroku-300.png">
+          </p>
+        </div>
+      </div>
+      <div class="step floating future" data-rotate="45" data-rotate-y="45" data-x="2000" data-y="13550" id="step-43"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(2000px, 13550px, 0px) rotateX(0deg) rotateY(45deg) rotateZ(45deg) scale(1); transform-style: preserve-3d;">
+        <div id="about">
+          <h3>@brandur</h3>
+          <p>brandur@mutelight.org</p>
+          <ul class="notes">
+            <li>* Thank-you <strong>Frozen Rails</strong>!!</li>
+            <li>* Effects by <a href="http://bartaz.github.com/impress.js">Impress.js</a></li>
+            <li>* Powered by <strong>Heroku</strong>; <a href="https://github.com/brandur/composable">source code</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="step future" data-rotate="-90" data-scale="9" data-x="1000" data-y="15500" id="overview"
+        style="position: absolute; transform: translate(-50%, -50%) translate3d(1000px, 15500px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-90deg) scale(9); transform-style: preserve-3d;">
+      </div>
+    </div>
+  </div>
+  <script src="./assets/application.js" type="text/javascript"></script>
+  <script type="text/javascript">impress().init()</script>
+
+</body>
+
+</html>
