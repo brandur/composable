@@ -1,5 +1,4 @@
-Composable
-==========
+# Composable
 
 Slides for a talk given at Frozen Rails 2012.
 
